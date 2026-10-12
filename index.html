@@ -25,7 +25,6 @@
     user-select: none;
   }
 
-  /* ===== NỀN PARTICLE + ORB ===== */
   #particles {
     position: fixed;
     inset: 0;
@@ -52,7 +51,6 @@
     66% { transform: translate(-40px, 40px) scale(0.9); }
   }
 
-  /* ===== KHUNG CHÍNH ===== */
   .presentation {
     position: relative;
     width: 100%;
@@ -61,7 +59,6 @@
     perspective: 1500px;
   }
 
-  /* ===== SLIDE ===== */
   .slide {
     position: absolute;
     inset: 0;
@@ -69,14 +66,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 60px 6vw;
+    padding: 50px 5vw;
     text-align: center;
     opacity: 0;
     transform: translate3d(0, 100px, -300px) rotateX(-15deg);
     transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: none;
     filter: blur(20px);
+    overflow-y: auto;
   }
+
+  .slide::-webkit-scrollbar { width: 6px; }
+  .slide::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
 
   .slide.active {
     opacity: 1;
@@ -91,10 +92,9 @@
     filter: blur(20px);
   }
 
-  /* ===== TIÊU ĐỀ ===== */
   h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5.5vw, 4.5rem);
+    font-size: clamp(2rem, 5vw, 4rem);
     font-weight: 900;
     letter-spacing: -2px;
     line-height: 1.05;
@@ -115,7 +115,7 @@
 
   h2 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(1.5rem, 3.6vw, 2.8rem);
+    font-size: clamp(1.4rem, 3.2vw, 2.5rem);
     font-weight: 700;
     margin-bottom: 0.5em;
     letter-spacing: -1px;
@@ -126,80 +126,80 @@
     filter: drop-shadow(0 2px 20px rgba(168, 85, 247, 0.5));
   }
 
+  h3 {
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+  }
+
   p, li {
-    font-size: clamp(0.9rem, 1.5vw, 1.25rem);
-    line-height: 1.7;
+    font-size: clamp(0.85rem, 1.3vw, 1.1rem);
+    line-height: 1.65;
     font-weight: 300;
     color: rgba(255, 255, 255, 0.92);
   }
 
-  p + p { margin-top: 0.35em; }
+  p + p { margin-top: 0.3em; }
 
-  ul { list-style: none; margin-top: 0.8em; }
+  ul { list-style: none; margin-top: 0.5em; }
 
   ul li {
-    padding: 0.45em 0 0.45em 2em;
+    padding: 0.35em 0 0.35em 1.8em;
     position: relative;
     text-align: left;
-    max-width: 800px;
-    margin: 0 auto;
   }
 
   ul li::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 8px;
-    height: 8px;
+    top: 0.75em;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--pink), var(--cyan));
-    box-shadow: 0 0 12px var(--pink), 0 0 20px var(--cyan);
+    box-shadow: 0 0 10px var(--pink), 0 0 16px var(--cyan);
   }
 
-  /* ===== ICON / ẢNH LỚN ===== */
   .hero-icon {
-    font-size: clamp(4rem, 10vw, 7rem);
-    margin-bottom: 0.15em;
+    font-size: clamp(3.5rem, 8vw, 5.5rem);
+    margin-bottom: 0.1em;
     filter: drop-shadow(0 10px 40px rgba(255, 215, 0, 0.6));
     animation: heroFloat 4s ease-in-out infinite;
     line-height: 1;
   }
 
   .hero-img {
-    width: min(320px, 45vw);
+    width: min(280px, 40vw);
     height: auto;
-    max-height: 42vh;
+    max-height: 36vh;
     object-fit: contain;
-    border-radius: 20px;
-    box-shadow: 
-      0 25px 60px rgba(0, 0, 0, 0.55),
-      0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    border-radius: 18px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
     animation: heroFloat 4s ease-in-out infinite;
     margin-bottom: 0.3em;
     background: rgba(255, 255, 255, 0.05);
-    padding: 8px;
+    padding: 6px;
   }
 
   @keyframes heroFloat {
     0%, 100% { transform: translateY(0) rotate(-1.5deg); }
-    50% { transform: translateY(-16px) rotate(1.5deg); }
+    50% { transform: translateY(-14px) rotate(1.5deg); }
   }
 
-  /* ===== CARD GLASS ===== */
+  /* ===== GLASS CARD ===== */
   .glass {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 24px;
-    padding: 24px 36px;
+    border-radius: 20px;
+    padding: 20px 28px;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    box-shadow: 
-      0 20px 60px rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    margin-top: 1.2em;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
     animation: cardIn 1s ease 0.3s both;
+    text-align: left;
   }
 
   @keyframes cardIn {
@@ -209,18 +209,61 @@
 
   .glass p { font-weight: 400; }
 
-  /* ===== LAYOUT 2 CỘT ===== */
+  /* ===== GRID CARD ===== */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    max-width: 1100px;
+    width: 100%;
+    margin-top: 1em;
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 18px 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    text-align: left;
+    transition: all 0.35s;
+    animation: cardIn 0.8s ease both;
+  }
+
+  .card:hover {
+    background: rgba(255, 255, 255, 0.13);
+    transform: translateY(-5px);
+    border-color: rgba(255, 110, 199, 0.4);
+    box-shadow: 0 25px 50px rgba(255, 110, 199, 0.2);
+  }
+
+  .card .emoji {
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .card p, .card li {
+    font-size: clamp(0.8rem, 1.15vw, 0.98rem);
+    line-height: 1.55;
+  }
+
+  .card ul li { padding: 0.2em 0 0.2em 1.5em; }
+  .card ul li::before { width: 5px; height: 5px; top: 0.7em; }
+
+  /* ===== SPLIT ===== */
   .split {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2.5em;
+    gap: 2em;
     align-items: center;
-    max-width: 1150px;
+    max-width: 1100px;
     width: 100%;
   }
 
   @media (max-width: 768px) {
-    .split { grid-template-columns: 1fr; gap: 1.2em; }
+    .split { grid-template-columns: 1fr; gap: 1em; }
   }
 
   .split-left { text-align: left; }
@@ -232,18 +275,18 @@
 
   .split-right img {
     width: 100%;
-    max-width: 340px;
-    max-height: 40vh;
+    max-width: 300px;
+    max-height: 36vh;
     object-fit: contain;
-    border-radius: 20px;
+    border-radius: 18px;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
     animation: heroFloat 5s ease-in-out infinite;
     background: rgba(255, 255, 255, 0.05);
-    padding: 8px;
+    padding: 6px;
   }
 
   .split-right.emoji {
-    font-size: clamp(5rem, 12vw, 10rem);
+    font-size: clamp(4rem, 10vw, 8rem);
     animation: heroFloat 5s ease-in-out infinite;
     filter: drop-shadow(0 20px 50px rgba(79, 209, 255, 0.5));
   }
@@ -251,15 +294,15 @@
   /* ===== BADGE ===== */
   .badge {
     display: inline-block;
-    padding: 7px 20px;
+    padding: 6px 18px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 999px;
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     letter-spacing: 3px;
     text-transform: uppercase;
     font-weight: 600;
-    margin-bottom: 1.2em;
+    margin-bottom: 1em;
     backdrop-filter: blur(10px);
     animation: cardIn 0.8s ease both;
   }
@@ -269,10 +312,10 @@
   .theme-intro .badge { color: var(--pink); border-color: var(--pink); box-shadow: 0 0 20px rgba(255, 110, 199, 0.4); }
   .theme-outro .badge { color: var(--cyan); border-color: var(--cyan); box-shadow: 0 0 20px rgba(79, 209, 255, 0.4); }
 
-  /* ===== ĐIỀU HƯỚNG ===== */
+  /* ===== NAV ===== */
   .nav {
     position: fixed;
-    bottom: 25px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -291,9 +334,9 @@
     border: 1px solid rgba(255, 255, 255, 0.15);
     color: #fff;
     font-family: inherit;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    padding: 11px 24px;
+    padding: 10px 22px;
     border-radius: 999px;
     cursor: pointer;
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -306,15 +349,14 @@
     box-shadow: 0 10px 30px rgba(168, 85, 247, 0.5);
   }
 
-  /* ===== BỘ ĐẾM ===== */
   .counter {
     position: fixed;
-    top: 25px;
-    right: 25px;
-    font-size: 0.85rem;
+    top: 22px;
+    right: 22px;
+    font-size: 0.82rem;
     font-weight: 600;
     letter-spacing: 2px;
-    padding: 9px 20px;
+    padding: 8px 18px;
     background: rgba(10, 10, 20, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 999px;
@@ -322,26 +364,25 @@
     backdrop-filter: blur(20px);
   }
 
-  .counter .num { color: var(--gold); font-size: 1rem; }
+  .counter .num { color: var(--gold); font-size: 0.95rem; }
 
-  /* ===== LOGO ===== */
   .logo {
     position: fixed;
-    top: 25px;
-    left: 25px;
+    top: 22px;
+    left: 22px;
     z-index: 100;
     display: flex;
     align-items: center;
     gap: 10px;
     font-weight: 800;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     letter-spacing: 2px;
     text-transform: uppercase;
   }
 
   .logo-dot {
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
     background: var(--pink);
     box-shadow: 0 0 20px var(--pink);
@@ -353,7 +394,6 @@
     50% { opacity: 0.5; transform: scale(1.4); }
   }
 
-  /* ===== PROGRESS BAR ===== */
   .progress-bar {
     position: fixed;
     top: 0;
@@ -368,18 +408,17 @@
     box-shadow: 0 0 20px var(--pink);
   }
 
-  /* ===== NÚT ÂM THANH ===== */
   .sound-toggle {
     position: fixed;
-    top: 25px;
-    right: 120px;
-    width: 42px;
-    height: 42px;
+    top: 22px;
+    right: 110px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: rgba(10, 10, 20, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.12);
     color: #fff;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     cursor: pointer;
     z-index: 100;
     backdrop-filter: blur(20px);
@@ -394,12 +433,11 @@
     transform: scale(1.1);
   }
 
-  /* ===== HINT ===== */
   .hint {
     position: fixed;
-    bottom: 25px;
-    right: 25px;
-    font-size: 0.72rem;
+    bottom: 22px;
+    right: 22px;
+    font-size: 0.7rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.4);
@@ -411,43 +449,41 @@
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 6px;
-    padding: 2px 8px;
+    padding: 2px 7px;
     font-family: inherit;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
   }
 
-  /* ===== STAGGER ANIMATION ===== */
   .slide.active .stagger > * {
     animation: staggerIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
-
-  .slide.active .stagger > *:nth-child(1) { animation-delay: 0.1s; }
-  .slide.active .stagger > *:nth-child(2) { animation-delay: 0.2s; }
-  .slide.active .stagger > *:nth-child(3) { animation-delay: 0.3s; }
-  .slide.active .stagger > *:nth-child(4) { animation-delay: 0.4s; }
-  .slide.active .stagger > *:nth-child(5) { animation-delay: 0.5s; }
-  .slide.active .stagger > *:nth-child(6) { animation-delay: 0.6s; }
+  .slide.active .stagger > *:nth-child(1) { animation-delay: 0.05s; }
+  .slide.active .stagger > *:nth-child(2) { animation-delay: 0.15s; }
+  .slide.active .stagger > *:nth-child(3) { animation-delay: 0.25s; }
+  .slide.active .stagger > *:nth-child(4) { animation-delay: 0.35s; }
+  .slide.active .stagger > *:nth-child(5) { animation-delay: 0.45s; }
+  .slide.active .stagger > *:nth-child(6) { animation-delay: 0.55s; }
+  .slide.active .stagger > *:nth-child(7) { animation-delay: 0.65s; }
 
   @keyframes staggerIn {
     from { opacity: 0; transform: translateY(30px); filter: blur(8px); }
     to { opacity: 1; transform: translateY(0); filter: blur(0); }
   }
 
-  /* ===== MEMBER ===== */
   .member-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    margin-top: 1.2em;
+    margin-top: 1em;
   }
 
   .member {
-    padding: 9px 20px;
+    padding: 8px 18px;
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 999px;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 500;
     backdrop-filter: blur(10px);
     transition: all 0.3s;
@@ -460,52 +496,64 @@
     box-shadow: 0 10px 25px rgba(255, 110, 199, 0.3);
   }
 
-  /* ===== RESPONSIVE ===== */
+  /* Fact box đặc biệt */
+  .fact {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 110, 199, 0.15));
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-top: 12px;
+    font-size: clamp(0.82rem, 1.15vw, 0.98rem);
+    text-align: left;
+    animation: cardIn 0.8s ease both;
+  }
+
+  .fact::before {
+    content: "💡 Bạn có biết? ";
+    font-weight: 700;
+    color: var(--gold);
+  }
+
   @media (max-width: 768px) {
-    .slide { padding: 40px 5vw; }
-    .glass { padding: 18px 22px; }
-    .nav button { padding: 9px 16px; font-size: 0.8rem; }
-    .counter, .sound-toggle { top: 15px; }
-    .counter { right: 15px; }
-    .sound-toggle { right: 105px; width: 36px; height: 36px; font-size: 0.95rem; }
-    .logo { top: 15px; left: 15px; font-size: 0.7rem; }
+    .slide { padding: 35px 4vw; }
+    .glass { padding: 15px 18px; }
+    .card { padding: 14px 16px; }
+    .nav button { padding: 8px 14px; font-size: 0.78rem; }
+    .counter, .sound-toggle { top: 14px; }
+    .counter { right: 14px; }
+    .sound-toggle { right: 100px; width: 34px; height: 34px; font-size: 0.9rem; }
+    .logo { top: 14px; left: 14px; font-size: 0.68rem; }
     .hint { display: none; }
-    .hero-img { max-height: 30vh; }
-    .split-right img { max-height: 28vh; }
+    .hero-img { max-height: 26vh; }
+    .split-right img { max-height: 24vh; }
+    .card-grid { grid-template-columns: 1fr; gap: 10px; }
   }
 </style>
 </head>
 <body>
 
-<!-- Thanh tiến trình -->
 <div class="progress-bar" id="progressBar"></div>
 
-<!-- Nền động -->
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
 <canvas id="particles"></canvas>
 
-<!-- Logo -->
 <div class="logo">
   <span class="logo-dot"></span>
   <span>ÂM NHẠC 9</span>
 </div>
 
-<!-- Bộ đếm -->
 <div class="counter">
   <span class="num" id="curNum">01</span> / <span id="totalNum">16</span>
 </div>
 
-<!-- Nút âm thanh -->
 <button class="sound-toggle" id="soundBtn" title="Bật/tắt âm thanh">🔇</button>
 
-<!-- Hint -->
 <div class="hint">
   <kbd>←</kbd> <kbd>→</kbd> chuyển slide
 </div>
 
-<!-- ==================== SLIDES ==================== -->
 <div class="presentation" id="presentation">
 
   <!-- ========== SLIDE 1 — MỞ ĐẦU ========== -->
@@ -514,10 +562,10 @@
       <span class="badge">Nhóm 6</span>
       <div class="hero-icon">🎼</div>
       <h1>Âm nhạc 9</h1>
-      <h2 style="font-size:clamp(1.1rem,2.2vw,1.6rem);margin-top:-0.3em;">Recorder &amp; Kèn phím</h2>
-      <p style="opacity:0.85;">Khám phá hai nhạc cụ đầy màu sắc trong chương trình Âm nhạc lớp 9</p>
-      <div class="glass">
-        <p style="font-weight:600;letter-spacing:2px;font-size:0.8rem;text-transform:uppercase;margin-bottom:10px;">Thành viên nhóm</p>
+      <h2 style="font-size:clamp(1rem,2vw,1.5rem);margin-top:-0.3em;">Recorder &amp; Kèn phím</h2>
+      <p style="opacity:0.85;max-width:700px;">Khám phá vẻ đẹp, lịch sử và cách chơi hai nhạc cụ thú vị trong chương trình Âm nhạc lớp 9</p>
+      <div class="glass" style="text-align:center;">
+        <p style="font-weight:600;letter-spacing:2px;font-size:0.78rem;text-transform:uppercase;margin-bottom:10px;">Thành viên nhóm</p>
         <div class="member-grid">
           <span class="member">Quang Long</span>
           <span class="member">Hoàng Long</span>
@@ -530,33 +578,33 @@
     </div>
   </div>
 
-  <!-- ========== RECORDER: 7 SLIDE ========== -->
-
-  <!-- Slide 2 — Recorder là gì -->
+  <!-- ========== SLIDE 2 — Recorder là gì ========== -->
   <div class="slide theme-recorder">
     <div class="stagger">
       <span class="badge">Recorder • 01</span>
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Recorder_Soprano.jpg/640px-Recorder_Soprano.jpg" 
-           alt="Recorder Soprano" 
-           class="hero-img"
+           alt="Recorder Soprano" class="hero-img"
            onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'hero-icon\'>🪈</div>');">
       <h2>Recorder là gì?</h2>
-      <p>Recorder là nhạc cụ hơi thuộc họ sáo dọc, được làm từ gỗ hoặc nhựa.</p>
-      <p>Đây là nhạc cụ quen thuộc trong giảng dạy âm nhạc phổ thông.</p>
+      <p><b>Recorder</b> (đọc: ri-cooc-đờ) là nhạc cụ hơi thuộc họ sáo dọc, có lịch sử hơn <b>700 năm</b>.</p>
+      <p>Ống có hình trụ, thổi dọc theo thân, âm thanh trong trẻo, dịu dàng — được cả thế giới dùng trong trường học.</p>
+      <div class="fact">Recorder là một trong những nhạc cụ <b>lâu đời nhất</b> vẫn còn được sử dụng phổ biến đến ngày nay.</div>
     </div>
   </div>
 
-  <!-- Slide 3 — Nguồn gốc -->
+  <!-- ========== SLIDE 3 — Nguồn gốc ========== -->
   <div class="slide theme-recorder">
     <div class="split">
       <div class="split-left stagger">
         <span class="badge">Recorder • 02</span>
         <h2 style="text-align:left;">Nguồn gốc<br>&amp; lịch sử</h2>
         <ul>
-          <li>Xuất hiện từ thời Trung Cổ ở châu Âu</li>
-          <li>Phát triển rực rỡ thời Phục Hưng và Baroque</li>
-          <li>Thế kỷ 20 được đưa vào trường học toàn cầu</li>
+          <li><b>Thế kỷ 14:</b> Xuất hiện ở châu Âu, gọi là "flute à bec" (sáo mỏ)</li>
+          <li><b>Thế kỷ 16–17:</b> Thời hoàng kim — xuất hiện trong mọi dàn nhạc cung đình</li>
+          <li><b>Thế kỷ 18:</b> Bị sáo ngang (flute) lấn át, dần mai một</li>
+          <li><b>Thế kỷ 20:</b> Hồi sinh mạnh mẽ trong giảng dạy âm nhạc</li>
         </ul>
+        <div class="fact">Nhà soạn nhạc thiên tài <b>J.S. Bach</b> đã viết nhiều tác phẩm riêng cho Recorder.</div>
       </div>
       <div class="split-right">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Baroque_recorder.jpg/640px-Baroque_recorder.jpg" 
@@ -566,117 +614,179 @@
     </div>
   </div>
 
-  <!-- Slide 4 — Cấu tạo -->
+  <!-- ========== SLIDE 4 — Cấu tạo ========== -->
   <div class="slide theme-recorder">
     <div class="stagger">
       <span class="badge">Recorder • 03</span>
-      <h2>Cấu tạo</h2>
-      <div class="split" style="margin-top:0.8em;">
-        <div class="split-left">
-          <div class="glass" style="margin-top:0;">
-            <p>🔹 <b>Đầu thổi</b> — nơi thổi hơi vào</p>
-            <p style="margin-top:12px;">🔹 <b>Thân ống</b> — chứa các lỗ bấm</p>
-            <p style="margin-top:12px;">🔹 <b>Chân ống</b> — phần loe ra ở cuối</p>
-          </div>
+      <h2>Cấu tạo chi tiết</h2>
+      <div class="card-grid">
+        <div class="card">
+          <span class="emoji">💨</span>
+          <h3>1. Đầu thổi (Windway)</h3>
+          <p>Nơi thổi hơi vào, có rãnh dẫn khí và lưỡi gà (fipple) tạo dao động âm thanh.</p>
         </div>
-        <div class="split-right">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Three_recorders.jpg/640px-Three_recorders.jpg" 
-               alt="Cấu tạo Recorder"
-               onerror="this.parentElement.classList.add('emoji');this.parentElement.innerHTML='🪈';">
+        <div class="card">
+          <span class="emoji">🎋</span>
+          <h3>2. Thân ống (Body)</h3>
+          <p>Phần dài nhất, có <b>7 lỗ bấm</b> mặt trước + 1 lỗ ngón cái mặt sau.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🔔</span>
+          <h3>3. Chân ống (Bell)</h3>
+          <p>Phần loe ra ở cuối, giúp khuếch đại và làm ấm âm thanh.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Slide 5 — Các loại -->
+  <!-- ========== SLIDE 5 — Các loại ========== -->
   <div class="slide theme-recorder">
-    <div class="split">
-      <div class="split-left stagger">
-        <span class="badge">Recorder • 04</span>
-        <h2 style="text-align:left;">Các loại<br>Recorder</h2>
-        <ul>
-          <li><b>Sopranino</b> — nhỏ nhất, âm cao</li>
-          <li><b>Soprano</b> — phổ biến nhất</li>
-          <li><b>Alto</b> — âm trầm hơn</li>
-          <li><b>Tenor &amp; Bass</b> — kích thước lớn</li>
-        </ul>
+    <div class="stagger">
+      <span class="badge">Recorder • 04</span>
+      <h2>Các loại Recorder</h2>
+      <div class="card-grid">
+        <div class="card">
+          <span class="emoji">🎵</span>
+          <h3>Sopranino</h3>
+          <p>Nhỏ nhất (~20cm), âm cao nhất, dùng trong hòa tấu cổ điển.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🎶</span>
+          <h3>Soprano / Descant</h3>
+          <p>Phổ biến nhất trong trường học (~32cm), âm vực C5–D7.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🎼</span>
+          <h3>Alto / Treble</h3>
+          <p>Kích thước trung (~47cm), âm trầm ấm, dùng trong dàn nhạc.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🎺</span>
+          <h3>Tenor</h3>
+          <p>Lớn hơn (~60cm), có khóa thổi uốn cong, âm trầm.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🎻</span>
+          <h3>Bass</h3>
+          <p>Khổng lồ (~1m), âm cực trầm, cần giá đỡ khi chơi.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🌟</span>
+          <h3>Great Bass / Contra</h3>
+          <p>Hiếm gặp, kích thước "khủng" dùng trong dàn nhạc chuyên nghiệp.</p>
+        </div>
       </div>
-      <div class="split-right emoji">🎼</div>
     </div>
   </div>
 
-  <!-- Slide 6 — Cách chơi -->
+  <!-- ========== SLIDE 6 — Cách chơi ========== -->
   <div class="slide theme-recorder">
     <div class="split">
       <div class="split-right emoji" style="order:-1;">✋</div>
       <div class="split-left stagger">
         <span class="badge">Recorder • 05</span>
-        <h2 style="text-align:left;">Cách chơi</h2>
+        <h2 style="text-align:left;">Cách chơi<br>Recorder</h2>
         <ul>
-          <li>Tay trái đặt trên, tay phải đặt dưới</li>
-          <li>Thổi hơi nhẹ và đều đặn</li>
-          <li>Bấm lỗ để tạo nốt nhạc khác nhau</li>
-          <li>Luyện tập hơi thở và ngón tay</li>
+          <li><b>Tư thế:</b> Ngồi thẳng, 2 chân chạm đất, khuỷu tay hơi mở</li>
+          <li><b>Đặt tay:</b> Tay trái trên, tay phải dưới</li>
+          <li><b>Hơi thở:</b> Thổi nhẹ, đều — như thổi nến sinh nhật</li>
+          <li><b>Ngón tay:</b> Bấm kín lỗ, tránh hở vì sẽ lệch nốt</li>
+          <li><b>Luyện tập:</b> Tập "tu" (thổi) và "du" (ngắt hơi) đều đặn</li>
         </ul>
+        <div class="fact">Thổi quá mạnh sẽ tạo tiếng rít chói tai — nhớ thổi <b>nhẹ như hơi thở</b>!</div>
       </div>
     </div>
   </div>
 
-  <!-- Slide 7 — Vai trò -->
+  <!-- ========== SLIDE 7 — Vai trò ========== -->
   <div class="slide theme-recorder">
     <div class="stagger">
       <span class="badge">Recorder • 06</span>
       <div class="hero-icon">🎧</div>
       <h2>Vai trò trong Âm nhạc 9</h2>
-      <ul style="text-align:left;max-width:700px;">
-        <li>Giúp học sinh làm quen với nốt nhạc và tiết tấu</li>
-        <li>Rèn luyện kỹ năng đọc nhạc và cảm âm</li>
-        <li>Dễ học, chi phí thấp, phù hợp lứa tuổi</li>
-      </ul>
+      <div class="card-grid">
+        <div class="card">
+          <span class="emoji">🎯</span>
+          <h3>Nhập môn lý thuyết</h3>
+          <p>Làm quen với nốt nhạc, khuông nhạc, trường độ và tiết tấu qua thực hành.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">👂</span>
+          <h3>Luyện cảm âm</h3>
+          <p>Nghe và phân biệt cao độ — kỹ năng nền tảng cho mọi nhạc cụ khác.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">💰</span>
+          <h3>Chi phí thấp</h3>
+          <p>Giá chỉ từ 50.000đ — phù hợp mọi học sinh, dễ mua, dễ thay thế.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">👥</span>
+          <h3>Chơi tập thể</h3>
+          <p>Cả lớp có thể cùng thổi một bản nhạc, tạo không khí vui vẻ.</p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Slide 8 — Ứng dụng -->
+  <!-- ========== SLIDE 8 — Ứng dụng ========== -->
   <div class="slide theme-recorder">
     <div class="stagger">
       <span class="badge">Recorder • 07</span>
       <div class="hero-icon">🌟</div>
       <h2>Ứng dụng thực tế</h2>
-      <div class="glass">
-        <p>🎓 Giảng dạy âm nhạc ở trường phổ thông</p>
-        <p style="margin-top:10px;">🎺 Biểu diễn dàn nhạc nhỏ, hòa tấu</p>
-        <p style="margin-top:10px;">🎯 Nhạc cụ nhập môn cho người mới học</p>
+      <div class="card-grid">
+        <div class="card">
+          <span class="emoji">🏫</span>
+          <h3>Trường học</h3>
+          <p>Dạy âm nhạc ở cấp tiểu học và THCS tại hơn <b>100 quốc gia</b>.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🎭</span>
+          <h3>Biểu diễn</h3>
+          <p>Hòa tấu nhỏ, nhạc kịch thiếu nhi, lễ hội đường phố.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🎬</span>
+          <h3>Soundtrack</h3>
+          <p>Xuất hiện trong nhạc phim "The Sound of Music", "Harry Potter"…</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🧘</span>
+          <h3>Trị liệu</h3>
+          <p>Dùng trong âm nhạc trị liệu — giúp thư giãn, giảm căng thẳng.</p>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ========== KÈN PHÍM: 7 SLIDE ========== -->
-
-  <!-- Slide 9 — Kèn phím là gì -->
+  <!-- ========== SLIDE 9 — Kèn phím là gì ========== -->
   <div class="slide theme-keyboard">
     <div class="stagger">
       <span class="badge">Kèn phím • 01</span>
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Melodica.jpg/640px-Melodica.jpg" 
-           alt="Melodica" 
-           class="hero-img"
+           alt="Melodica" class="hero-img"
            onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'hero-icon\'>🎹</div>');">
       <h2>Kèn phím là gì?</h2>
-      <p>Kèn phím (Keyboard / Melodica) là nhạc cụ kết hợp</p>
-      <p>giữa bàn phím đàn piano và hơi thổi của kèn.</p>
+      <p><b>Kèn phím</b> (Melodica / Pianica) là "con lai" giữa piano và kèn harmonica.</p>
+      <p>Người chơi vừa <b>bấm phím như đàn</b>, vừa <b>thổi hơi như kèn</b> — tạo ra âm thanh độc đáo, mềm mại.</p>
+      <div class="fact">Tên gọi khác: <b>Melodica, Pianica, Melodion, Clavietta</b> — tùy theo hãng sản xuất.</div>
     </div>
   </div>
 
-  <!-- Slide 10 — Nguồn gốc -->
+  <!-- ========== SLIDE 10 — Nguồn gốc ========== -->
   <div class="slide theme-keyboard">
     <div class="split">
       <div class="split-left stagger">
         <span class="badge">Kèn phím • 02</span>
         <h2 style="text-align:left;">Nguồn gốc<br>&amp; lịch sử</h2>
         <ul>
-          <li>Ra đời đầu thế kỷ 20 tại châu Âu</li>
-          <li>Phát triển mạnh ở Đức và Ý</li>
-          <li>Ngày càng phổ biến trong âm nhạc hiện đại</li>
+          <li><b>1950s:</b> Hãng Hohner (Đức) phát triển Melodica hiện đại</li>
+          <li><b>1960s:</b> Suzuki (Nhật) sản xuất Pianica — phổ biến ở châu Á</li>
+          <li><b>1970s:</b> Du nhập vào trường học Việt Nam</li>
+          <li><b>Ngày nay:</b> Có mặt trong âm nhạc hiện đại, jazz, pop, indie</li>
         </ul>
+        <div class="fact">Melodica nổi tiếng qua bản hit <b>"Clocks"</b> của Coldplay và nhiều ca khúc indie khác.</div>
       </div>
       <div class="split-right">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Suzuki_Melodion.jpg/640px-Suzuki_Melodion.jpg" 
@@ -686,85 +796,143 @@
     </div>
   </div>
 
-  <!-- Slide 11 — Cấu tạo -->
+  <!-- ========== SLIDE 11 — Cấu tạo ========== -->
   <div class="slide theme-keyboard">
     <div class="stagger">
       <span class="badge">Kèn phím • 03</span>
-      <h2>Cấu tạo</h2>
-      <div class="split" style="margin-top:0.8em;">
-        <div class="split-left">
-          <div class="glass" style="margin-top:0;">
-            <p>🔹 <b>Bàn phím</b> — các phím đàn</p>
-            <p style="margin-top:12px;">🔹 <b>Ống thổi</b> — miệng thổi hơi</p>
-            <p style="margin-top:12px;">🔹 <b>Thân kèn</b> — chứa hệ thống van hơi</p>
-          </div>
+      <h2>Cấu tạo chi tiết</h2>
+      <div class="card-grid">
+        <div class="card">
+          <span class="emoji">🎹</span>
+          <h3>1. Bàn phím</h3>
+          <p>Thường có <b>25–37 phím</b> (2–3 quãng tám), giống piano nhưng nhỏ hơn.</p>
         </div>
-        <div class="split-right">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Yamaha_Pianica.jpg/640px-Yamaha_Pianica.jpg" 
-               alt="Yamaha Pianica"
-               onerror="this.parentElement.classList.add('emoji');this.parentElement.innerHTML='🎹';">
+        <div class="card">
+          <span class="emoji">💨</span>
+          <h3>2. Ống thổi</h3>
+          <p>Ống nhựa dài ~50cm, có thể tháo rời — thổi trực tiếp hoặc qua ống.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🔧</span>
+          <h3>3. Thân kèn</h3>
+          <p>Chứa hệ thống <b>van hơi</b> (reed) bằng kim loại — bộ phận tạo âm.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🎒</span>
+          <h3>4. Phụ kiện</h3>
+          <p>Kèm túi đựng, ống thổi dự phòng, khăn lau và sách hướng dẫn.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Slide 12 — Các loại -->
+  <!-- ========== SLIDE 12 — Các loại ========== -->
   <div class="slide theme-keyboard">
-    <div class="split">
-      <div class="split-left stagger">
-        <span class="badge">Kèn phím • 04</span>
-        <h2 style="text-align:left;">Các loại<br>kèn phím</h2>
-        <ul>
-          <li><b>Melodica</b> — nhỏ gọn, phổ biến</li>
-          <li><b>Keyboard điện tử</b> — nhiều âm sắc</li>
-          <li><b>Piano điện</b> — kết hợp phím và hơi</li>
-        </ul>
+    <div class="stagger">
+      <span class="badge">Kèn phím • 04</span>
+      <h2>Các loại kèn phím</h2>
+      <div class="card-grid">
+        <div class="card">
+          <span class="emoji">🎵</span>
+          <h3>Melodica Soprano</h3>
+          <p>25–32 phím, phổ biến nhất, âm thanh trong trẻo. Dành cho người mới.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🎶</span>
+          <h3>Melodica Alto</h3>
+          <p>37 phím, âm trầm ấm, phù hợp biểu diễn chuyên nghiệp.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🎹</span>
+          <h3>Keyboard điện tử</h3>
+          <p>Loại hiện đại, có loa + nhiều âm sắc, kết hợp cả hơi thổi và điện tử.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🎼</span>
+          <h3>Piano điện (Digital Piano)</h3>
+          <p>Có bàn phím full-size 88 phím, nhưng không cần thổi hơi.</p>
+        </div>
       </div>
-      <div class="split-right emoji">🎼</div>
     </div>
   </div>
 
-  <!-- Slide 13 — Cách chơi -->
+  <!-- ========== SLIDE 13 — Cách chơi ========== -->
   <div class="slide theme-keyboard">
     <div class="split">
       <div class="split-right emoji" style="order:-1;">✋</div>
       <div class="split-left stagger">
         <span class="badge">Kèn phím • 05</span>
-        <h2 style="text-align:left;">Cách chơi</h2>
+        <h2 style="text-align:left;">Cách chơi<br>kèn phím</h2>
         <ul>
-          <li>Ngồi thẳng, tay đúng tư thế trên phím</li>
-          <li>Thổi hơi đều qua ống thổi</li>
-          <li>Bấm phím để tạo nốt nhạc</li>
-          <li>Kết hợp hơi thở và ngón tay nhịp nhàng</li>
+          <li><b>Tư thế:</b> Ngồi thẳng, hoặc đứng đeo dây qua cổ</li>
+          <li><b>Tay:</b> Cong nhẹ như cầm quả bóng, đầu ngón tay bấm phím</li>
+          <li><b>Miệng:</b> Ngậm ống thổi, hơi thở đều và sâu</li>
+          <li><b>Phối hợp:</b> Bấm phím và thổi hơi đồng thời, đúng nhịp</li>
+          <li><b>Luyện tập:</b> Bắt đầu với gam Đô trưởng (C) đơn giản</li>
         </ul>
+        <div class="fact">Đừng thổi quá mạnh — kèn sẽ "ré" hoặc nghẹt âm. Hơi thở nhẹ như thổi trà nóng!</div>
       </div>
     </div>
   </div>
 
-  <!-- Slide 14 — Vai trò -->
+  <!-- ========== SLIDE 14 — Vai trò ========== -->
   <div class="slide theme-keyboard">
     <div class="stagger">
       <span class="badge">Kèn phím • 06</span>
       <div class="hero-icon">🎧</div>
       <h2>Vai trò trong Âm nhạc 9</h2>
-      <ul style="text-align:left;max-width:700px;">
-        <li>Giúp học sinh tiếp cận giai điệu và hòa âm</li>
-        <li>Phát triển khả năng phối hợp tay — hơi thở</li>
-        <li>Tạo nền tảng học piano và nhạc cụ phím</li>
-      </ul>
+      <div class="card-grid">
+        <div class="card">
+          <span class="emoji">🎯</span>
+          <h3>Tiếp cận giai điệu</h3>
+          <p>Học sinh chơi được giai điệu bài hát chỉ sau vài buổi luyện tập.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🤝</span>
+          <h3>Phối hợp tay — hơi</h3>
+          <p>Rèn luyện khả năng phối hợp 2 tay + hơi thở, tăng tập trung.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🎹</span>
+          <h3>Nền tảng piano</h3>
+          <p>Bàn phím giống piano → dễ chuyển sang học đàn phím sau này.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🎤</span>
+          <h3>Đệm hát đơn giản</h3>
+          <p>Vừa chơi vừa hát, phù hợp sinh hoạt văn nghệ lớp học.</p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Slide 15 — Ứng dụng -->
+  <!-- ========== SLIDE 15 — Ứng dụng ========== -->
   <div class="slide theme-keyboard">
     <div class="stagger">
       <span class="badge">Kèn phím • 07</span>
       <div class="hero-icon">🌟</div>
       <h2>Ứng dụng thực tế</h2>
-      <div class="glass">
-        <p>🎤 Biểu diễn solo, hòa tấu nhỏ</p>
-        <p style="margin-top:10px;">🎶 Đệm hát, chơi nhạc nhẹ</p>
-        <p style="margin-top:10px;">🏠 Giảng dạy và luyện tập tại nhà</p>
+      <div class="card-grid">
+        <div class="card">
+          <span class="emoji">🎤</span>
+          <h3>Biểu diễn solo</h3>
+          <p>Nhạc nhẹ, ballad, nhạc phim — âm thanh mềm mại, cảm xúc.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🎶</span>
+          <h3>Hòa tấu</h3>
+          <p>Kết hợp với guitar, ukulele, trống cajon trong ban nhạc nhỏ.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🏫</span>
+          <h3>Giảng dạy</h3>
+          <p>Giáo viên âm nhạc dùng để minh họa cao độ, giai điệu cho học sinh.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🏠</span>
+          <h3>Luyện tập tại nhà</h3>
+          <p>Nhỏ gọn, không cần điện, có thể mang đi du lịch, dã ngoại.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -775,9 +943,9 @@
       <span class="badge">Lời cảm ơn</span>
       <div class="hero-icon">💖</div>
       <h1>Cảm ơn cô<br>và các bạn!</h1>
-      <p style="opacity:0.9;">Đã lắng nghe phần thuyết trình của nhóm 6</p>
-      <div class="glass">
-        <p style="font-weight:600;letter-spacing:2px;font-size:0.8rem;text-transform:uppercase;margin-bottom:10px;">Nhóm 6</p>
+      <p style="opacity:0.9;max-width:650px;">Đã lắng nghe phần thuyết trình của nhóm 6 về <b>Recorder</b> và <b>Kèn phím</b></p>
+      <div class="glass" style="text-align:center;">
+        <p style="font-weight:600;letter-spacing:2px;font-size:0.78rem;text-transform:uppercase;margin-bottom:10px;">Nhóm 6</p>
         <div class="member-grid">
           <span class="member">Quang Long</span>
           <span class="member">Hoàng Long</span>
@@ -786,21 +954,20 @@
           <span class="member">Ánh Dương</span>
           <span class="member">Quang Kiệt</span>
         </div>
-        <p style="margin-top:18px;font-size:1.5rem;letter-spacing:8px;">🎶 🎹 🪈</p>
+        <p style="margin-top:16px;font-size:1.4rem;letter-spacing:8px;">🎶 🎹 🪈</p>
+        <p style="margin-top:14px;font-size:0.85rem;opacity:0.75;font-style:italic;">"Âm nhạc là ngôn ngữ của tâm hồn"</p>
       </div>
     </div>
   </div>
 
 </div>
 
-<!-- Điều hướng -->
 <div class="nav">
   <button onclick="prevSlide()">← Trước</button>
   <button onclick="nextSlide()">Tiếp →</button>
 </div>
 
 <script>
-/* ==================== NAVIGATION ==================== */
 const slides = document.querySelectorAll('.slide');
 const curNum = document.getElementById('curNum');
 const totalNum = document.getElementById('totalNum');
@@ -834,7 +1001,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'End') { current = slides.length - 1; showSlide(current); }
 });
 
-/* ==================== PARTICLE ==================== */
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 let W, H, particles = [];
@@ -847,10 +1013,7 @@ resize();
 window.addEventListener('resize', resize);
 
 class Particle {
-  constructor() {
-    this.reset();
-    this.y = Math.random() * H;
-  }
+  constructor() { this.reset(); this.y = Math.random() * H; }
   reset() {
     this.x = Math.random() * W;
     this.y = H + 10;
@@ -888,7 +1051,6 @@ function animate() {
 }
 animate();
 
-/* ==================== SOUND ==================== */
 let soundEnabled = false;
 let audioCtx = null;
 
@@ -915,7 +1077,6 @@ soundBtn.addEventListener('click', () => {
   if (soundEnabled) playTick();
 });
 
-/* ==================== PARALLAX ==================== */
 document.addEventListener('mousemove', e => {
   const x = (e.clientX / window.innerWidth - 0.5) * 20;
   const y = (e.clientY / window.innerHeight - 0.5) * 20;
@@ -925,7 +1086,6 @@ document.addEventListener('mousemove', e => {
   });
 });
 
-/* ==================== INIT ==================== */
 showSlide(0);
 </script>
 
