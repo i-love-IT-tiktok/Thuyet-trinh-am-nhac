@@ -25,7 +25,7 @@
     user-select: none;
   }
 
-  /* ===== NỀN PARTICLE ĐỘNG ===== */
+  /* ===== NỀN PARTICLE + ORB ===== */
   #particles {
     position: fixed;
     inset: 0;
@@ -69,7 +69,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 60px 8vw;
+    padding: 60px 6vw;
     text-align: center;
     opacity: 0;
     transform: translate3d(0, 100px, -300px) rotateX(-15deg);
@@ -94,7 +94,7 @@
   /* ===== TIÊU ĐỀ ===== */
   h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.2rem, 6vw, 5rem);
+    font-size: clamp(2rem, 5.5vw, 4.5rem);
     font-weight: 900;
     letter-spacing: -2px;
     line-height: 1.05;
@@ -104,7 +104,7 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: gradientFlow 6s ease infinite;
-    margin-bottom: 0.4em;
+    margin-bottom: 0.3em;
     filter: drop-shadow(0 4px 30px rgba(255, 110, 199, 0.4));
   }
 
@@ -115,9 +115,9 @@
 
   h2 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(1.6rem, 4vw, 3rem);
+    font-size: clamp(1.5rem, 3.6vw, 2.8rem);
     font-weight: 700;
-    margin-bottom: 0.6em;
+    margin-bottom: 0.5em;
     letter-spacing: -1px;
     background: linear-gradient(135deg, #fff, #c4b5fd);
     -webkit-background-clip: text;
@@ -127,21 +127,19 @@
   }
 
   p, li {
-    font-size: clamp(0.95rem, 1.6vw, 1.35rem);
-    line-height: 1.75;
+    font-size: clamp(0.9rem, 1.5vw, 1.25rem);
+    line-height: 1.7;
     font-weight: 300;
-    max-width: 900px;
     color: rgba(255, 255, 255, 0.92);
   }
 
-  p + p { margin-top: 0.4em; }
+  p + p { margin-top: 0.35em; }
 
-  ul { list-style: none; margin-top: 1em; }
+  ul { list-style: none; margin-top: 0.8em; }
 
   ul li {
-    padding: 0.5em 0;
+    padding: 0.45em 0 0.45em 2em;
     position: relative;
-    padding-left: 2em;
     text-align: left;
     max-width: 800px;
     margin: 0 auto;
@@ -160,18 +158,33 @@
     box-shadow: 0 0 12px var(--pink), 0 0 20px var(--cyan);
   }
 
-  /* ===== ICON LỚN ===== */
+  /* ===== ICON / ẢNH LỚN ===== */
   .hero-icon {
-    font-size: clamp(5rem, 12vw, 9rem);
-    margin-bottom: 0.2em;
+    font-size: clamp(4rem, 10vw, 7rem);
+    margin-bottom: 0.15em;
     filter: drop-shadow(0 10px 40px rgba(255, 215, 0, 0.6));
     animation: heroFloat 4s ease-in-out infinite;
     line-height: 1;
   }
 
+  .hero-img {
+    width: min(320px, 45vw);
+    height: auto;
+    max-height: 42vh;
+    object-fit: contain;
+    border-radius: 20px;
+    box-shadow: 
+      0 25px 60px rgba(0, 0, 0, 0.55),
+      0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    animation: heroFloat 4s ease-in-out infinite;
+    margin-bottom: 0.3em;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px;
+  }
+
   @keyframes heroFloat {
-    0%, 100% { transform: translateY(0) rotate(-2deg); }
-    50% { transform: translateY(-20px) rotate(2deg); }
+    0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+    50% { transform: translateY(-16px) rotate(1.5deg); }
   }
 
   /* ===== CARD GLASS ===== */
@@ -179,13 +192,13 @@
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 24px;
-    padding: 28px 40px;
+    padding: 24px 36px;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 
       0 20px 60px rgba(0, 0, 0, 0.3),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    margin-top: 1.5em;
+    margin-top: 1.2em;
     animation: cardIn 1s ease 0.3s both;
   }
 
@@ -200,14 +213,14 @@
   .split {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3em;
+    gap: 2.5em;
     align-items: center;
-    max-width: 1100px;
+    max-width: 1150px;
     width: 100%;
   }
 
   @media (max-width: 768px) {
-    .split { grid-template-columns: 1fr; gap: 1.5em; }
+    .split { grid-template-columns: 1fr; gap: 1.2em; }
   }
 
   .split-left { text-align: left; }
@@ -215,28 +228,42 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(6rem, 14vw, 12rem);
+  }
+
+  .split-right img {
+    width: 100%;
+    max-width: 340px;
+    max-height: 40vh;
+    object-fit: contain;
+    border-radius: 20px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    animation: heroFloat 5s ease-in-out infinite;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px;
+  }
+
+  .split-right.emoji {
+    font-size: clamp(5rem, 12vw, 10rem);
     animation: heroFloat 5s ease-in-out infinite;
     filter: drop-shadow(0 20px 50px rgba(79, 209, 255, 0.5));
   }
 
-  /* ===== BADGE / TAG ===== */
+  /* ===== BADGE ===== */
   .badge {
     display: inline-block;
-    padding: 8px 22px;
+    padding: 7px 20px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 999px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     letter-spacing: 3px;
     text-transform: uppercase;
     font-weight: 600;
-    margin-bottom: 1.5em;
+    margin-bottom: 1.2em;
     backdrop-filter: blur(10px);
     animation: cardIn 0.8s ease both;
   }
 
-  /* ===== NHÓM MÀU THEO CHỦ ĐỀ ===== */
   .theme-recorder .badge { color: var(--green); border-color: var(--green); box-shadow: 0 0 20px rgba(52, 211, 153, 0.4); }
   .theme-keyboard .badge { color: var(--gold); border-color: var(--gold); box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
   .theme-intro .badge { color: var(--pink); border-color: var(--pink); box-shadow: 0 0 20px rgba(255, 110, 199, 0.4); }
@@ -245,13 +272,13 @@
   /* ===== ĐIỀU HƯỚNG ===== */
   .nav {
     position: fixed;
-    bottom: 30px;
+    bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 12px;
+    gap: 10px;
     z-index: 100;
-    padding: 10px;
+    padding: 8px;
     background: rgba(10, 10, 20, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 999px;
@@ -264,14 +291,12 @@
     border: 1px solid rgba(255, 255, 255, 0.15);
     color: #fff;
     font-family: inherit;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    padding: 12px 26px;
+    padding: 11px 24px;
     border-radius: 999px;
     cursor: pointer;
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
   }
 
   .nav button:hover {
@@ -281,17 +306,15 @@
     box-shadow: 0 10px 30px rgba(168, 85, 247, 0.5);
   }
 
-  .nav button:active { transform: translateY(0); }
-
   /* ===== BỘ ĐẾM ===== */
   .counter {
     position: fixed;
-    top: 30px;
-    right: 30px;
+    top: 25px;
+    right: 25px;
     font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 2px;
-    padding: 10px 22px;
+    padding: 9px 20px;
     background: rgba(10, 10, 20, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 999px;
@@ -299,22 +322,19 @@
     backdrop-filter: blur(20px);
   }
 
-  .counter .num {
-    color: var(--gold);
-    font-size: 1.05rem;
-  }
+  .counter .num { color: var(--gold); font-size: 1rem; }
 
-  /* ===== LOGO GÓC TRÁI ===== */
+  /* ===== LOGO ===== */
   .logo {
     position: fixed;
-    top: 30px;
-    left: 30px;
+    top: 25px;
+    left: 25px;
     z-index: 100;
     display: flex;
     align-items: center;
     gap: 10px;
     font-weight: 800;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     letter-spacing: 2px;
     text-transform: uppercase;
   }
@@ -333,7 +353,7 @@
     50% { opacity: 0.5; transform: scale(1.4); }
   }
 
-  /* ===== THANH TIẾN TRÌNH ===== */
+  /* ===== PROGRESS BAR ===== */
   .progress-bar {
     position: fixed;
     top: 0;
@@ -351,15 +371,15 @@
   /* ===== NÚT ÂM THANH ===== */
   .sound-toggle {
     position: fixed;
-    top: 30px;
-    right: 130px;
-    width: 44px;
-    height: 44px;
+    top: 25px;
+    right: 120px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     background: rgba(10, 10, 20, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.12);
     color: #fff;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     cursor: pointer;
     z-index: 100;
     backdrop-filter: blur(20px);
@@ -374,12 +394,12 @@
     transform: scale(1.1);
   }
 
-  /* ===== HINT GÓC DƯỚI ===== */
+  /* ===== HINT ===== */
   .hint {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    font-size: 0.75rem;
+    bottom: 25px;
+    right: 25px;
+    font-size: 0.72rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.4);
@@ -396,7 +416,7 @@
     font-size: 0.7rem;
   }
 
-  /* ===== STAGGER ANIMATION CHO NỘI DUNG ===== */
+  /* ===== STAGGER ANIMATION ===== */
   .slide.active .stagger > * {
     animation: staggerIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
@@ -413,21 +433,21 @@
     to { opacity: 1; transform: translateY(0); filter: blur(0); }
   }
 
-  /* ===== MEMBER GRID ===== */
+  /* ===== MEMBER ===== */
   .member-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
     justify-content: center;
-    margin-top: 1.5em;
+    margin-top: 1.2em;
   }
 
   .member {
-    padding: 10px 22px;
+    padding: 9px 20px;
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 999px;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 500;
     backdrop-filter: blur(10px);
     transition: all 0.3s;
@@ -443,13 +463,15 @@
   /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
     .slide { padding: 40px 5vw; }
-    .glass { padding: 20px 25px; }
-    .nav button { padding: 10px 18px; font-size: 0.85rem; }
+    .glass { padding: 18px 22px; }
+    .nav button { padding: 9px 16px; font-size: 0.8rem; }
     .counter, .sound-toggle { top: 15px; }
     .counter { right: 15px; }
-    .sound-toggle { right: 110px; width: 38px; height: 38px; }
-    .logo { top: 15px; left: 15px; font-size: 0.75rem; }
+    .sound-toggle { right: 105px; width: 36px; height: 36px; font-size: 0.95rem; }
+    .logo { top: 15px; left: 15px; font-size: 0.7rem; }
     .hint { display: none; }
+    .hero-img { max-height: 30vh; }
+    .split-right img { max-height: 28vh; }
   }
 </style>
 </head>
@@ -480,7 +502,7 @@
 
 <!-- Hint -->
 <div class="hint">
-  <kbd>←</kbd> <kbd>→</kbd> để chuyển slide
+  <kbd>←</kbd> <kbd>→</kbd> chuyển slide
 </div>
 
 <!-- ==================== SLIDES ==================== -->
@@ -492,10 +514,10 @@
       <span class="badge">Nhóm 6 • Lớp 9A</span>
       <div class="hero-icon">🎼</div>
       <h1>Âm nhạc 9</h1>
-      <h2 style="font-size:clamp(1.2rem,2.5vw,1.8rem);margin-top:-0.3em;">Recorder &amp; Kèn phím</h2>
+      <h2 style="font-size:clamp(1.1rem,2.2vw,1.6rem);margin-top:-0.3em;">Recorder &amp; Kèn phím</h2>
       <p style="opacity:0.85;">Khám phá hai nhạc cụ đầy màu sắc trong chương trình Âm nhạc lớp 9</p>
       <div class="glass">
-        <p style="font-weight:600;letter-spacing:2px;font-size:0.85rem;text-transform:uppercase;margin-bottom:12px;">Thành viên nhóm</p>
+        <p style="font-weight:600;letter-spacing:2px;font-size:0.8rem;text-transform:uppercase;margin-bottom:10px;">Thành viên nhóm</p>
         <div class="member-grid">
           <span class="member">An</span>
           <span class="member">Bình</span>
@@ -510,18 +532,21 @@
 
   <!-- ========== RECORDER: 7 SLIDE ========== -->
 
-  <!-- Slide 2 -->
+  <!-- Slide 2 — Recorder là gì -->
   <div class="slide theme-recorder">
     <div class="stagger">
       <span class="badge">Recorder • 01</span>
-      <div class="hero-icon">🎵</div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Recorder_Soprano.jpg/640px-Recorder_Soprano.jpg" 
+           alt="Recorder Soprano" 
+           class="hero-img"
+           onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'hero-icon\'>🪈</div>');">
       <h2>Recorder là gì?</h2>
       <p>Recorder là nhạc cụ hơi thuộc họ sáo dọc, được làm từ gỗ hoặc nhựa.</p>
       <p>Đây là nhạc cụ quen thuộc trong giảng dạy âm nhạc phổ thông.</p>
     </div>
   </div>
 
-  <!-- Slide 3 -->
+  <!-- Slide 3 — Nguồn gốc -->
   <div class="slide theme-recorder">
     <div class="split">
       <div class="split-left stagger">
@@ -533,29 +558,37 @@
           <li>Thế kỷ 20 được đưa vào trường học toàn cầu</li>
         </ul>
       </div>
-      <div class="split-right">📜</div>
-    </div>
-  </div>
-
-  <!-- Slide 4 -->
-  <div class="slide theme-recorder">
-    <div class="stagger">
-      <span class="badge">Recorder • 03</span>
-      <h2>Cấu tạo</h2>
-      <div class="split" style="margin-top:1em;">
-        <div class="split-left">
-          <div class="glass" style="margin-top:0;">
-            <p>🔹 <b>Đầu thổi</b> — nơi thổi hơi vào</p>
-            <p style="margin-top:14px;">🔹 <b>Thân ống</b> — chứa các lỗ bấm</p>
-            <p style="margin-top:14px;">🔹 <b>Chân ống</b> — phần loe ra ở cuối</p>
-          </div>
-        </div>
-        <div class="split-right">🪈</div>
+      <div class="split-right">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Baroque_recorder.jpg/640px-Baroque_recorder.jpg" 
+             alt="Baroque Recorder"
+             onerror="this.parentElement.classList.add('emoji');this.parentElement.innerHTML='📜';">
       </div>
     </div>
   </div>
 
-  <!-- Slide 5 -->
+  <!-- Slide 4 — Cấu tạo -->
+  <div class="slide theme-recorder">
+    <div class="stagger">
+      <span class="badge">Recorder • 03</span>
+      <h2>Cấu tạo</h2>
+      <div class="split" style="margin-top:0.8em;">
+        <div class="split-left">
+          <div class="glass" style="margin-top:0;">
+            <p>🔹 <b>Đầu thổi</b> — nơi thổi hơi vào</p>
+            <p style="margin-top:12px;">🔹 <b>Thân ống</b> — chứa các lỗ bấm</p>
+            <p style="margin-top:12px;">🔹 <b>Chân ống</b> — phần loe ra ở cuối</p>
+          </div>
+        </div>
+        <div class="split-right">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Three_recorders.jpg/640px-Three_recorders.jpg" 
+               alt="Cấu tạo Recorder"
+               onerror="this.parentElement.classList.add('emoji');this.parentElement.innerHTML='🪈';">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5 — Các loại -->
   <div class="slide theme-recorder">
     <div class="split">
       <div class="split-left stagger">
@@ -568,14 +601,14 @@
           <li><b>Tenor &amp; Bass</b> — kích thước lớn</li>
         </ul>
       </div>
-      <div class="split-right">🎼</div>
+      <div class="split-right emoji">🎼</div>
     </div>
   </div>
 
-  <!-- Slide 6 -->
+  <!-- Slide 6 — Cách chơi -->
   <div class="slide theme-recorder">
     <div class="split">
-      <div class="split-right" style="order:-1;">✋</div>
+      <div class="split-right emoji" style="order:-1;">✋</div>
       <div class="split-left stagger">
         <span class="badge">Recorder • 05</span>
         <h2 style="text-align:left;">Cách chơi</h2>
@@ -589,7 +622,7 @@
     </div>
   </div>
 
-  <!-- Slide 7 -->
+  <!-- Slide 7 — Vai trò -->
   <div class="slide theme-recorder">
     <div class="stagger">
       <span class="badge">Recorder • 06</span>
@@ -603,7 +636,7 @@
     </div>
   </div>
 
-  <!-- Slide 8 -->
+  <!-- Slide 8 — Ứng dụng -->
   <div class="slide theme-recorder">
     <div class="stagger">
       <span class="badge">Recorder • 07</span>
@@ -611,26 +644,29 @@
       <h2>Ứng dụng thực tế</h2>
       <div class="glass">
         <p>🎓 Giảng dạy âm nhạc ở trường phổ thông</p>
-        <p style="margin-top:12px;">🎺 Biểu diễn dàn nhạc nhỏ, hòa tấu</p>
-        <p style="margin-top:12px;">🎯 Nhạc cụ nhập môn cho người mới học</p>
+        <p style="margin-top:10px;">🎺 Biểu diễn dàn nhạc nhỏ, hòa tấu</p>
+        <p style="margin-top:10px;">🎯 Nhạc cụ nhập môn cho người mới học</p>
       </div>
     </div>
   </div>
 
   <!-- ========== KÈN PHÍM: 7 SLIDE ========== -->
 
-  <!-- Slide 9 -->
+  <!-- Slide 9 — Kèn phím là gì -->
   <div class="slide theme-keyboard">
     <div class="stagger">
       <span class="badge">Kèn phím • 01</span>
-      <div class="hero-icon">🎹</div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Melodica.jpg/640px-Melodica.jpg" 
+           alt="Melodica" 
+           class="hero-img"
+           onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'hero-icon\'>🎹</div>');">
       <h2>Kèn phím là gì?</h2>
       <p>Kèn phím (Keyboard / Melodica) là nhạc cụ kết hợp</p>
       <p>giữa bàn phím đàn piano và hơi thổi của kèn.</p>
     </div>
   </div>
 
-  <!-- Slide 10 -->
+  <!-- Slide 10 — Nguồn gốc -->
   <div class="slide theme-keyboard">
     <div class="split">
       <div class="split-left stagger">
@@ -642,29 +678,37 @@
           <li>Ngày càng phổ biến trong âm nhạc hiện đại</li>
         </ul>
       </div>
-      <div class="split-right">📜</div>
-    </div>
-  </div>
-
-  <!-- Slide 11 -->
-  <div class="slide theme-keyboard">
-    <div class="stagger">
-      <span class="badge">Kèn phím • 03</span>
-      <h2>Cấu tạo</h2>
-      <div class="split" style="margin-top:1em;">
-        <div class="split-left">
-          <div class="glass" style="margin-top:0;">
-            <p>🔹 <b>Bàn phím</b> — các phím đàn</p>
-            <p style="margin-top:14px;">🔹 <b>Ống thổi</b> — miệng thổi hơi</p>
-            <p style="margin-top:14px;">🔹 <b>Thân kèn</b> — chứa hệ thống van hơi</p>
-          </div>
-        </div>
-        <div class="split-right">🎹</div>
+      <div class="split-right">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Suzuki_Melodion.jpg/640px-Suzuki_Melodion.jpg" 
+             alt="Suzuki Melodion"
+             onerror="this.parentElement.classList.add('emoji');this.parentElement.innerHTML='📜';">
       </div>
     </div>
   </div>
 
-  <!-- Slide 12 -->
+  <!-- Slide 11 — Cấu tạo -->
+  <div class="slide theme-keyboard">
+    <div class="stagger">
+      <span class="badge">Kèn phím • 03</span>
+      <h2>Cấu tạo</h2>
+      <div class="split" style="margin-top:0.8em;">
+        <div class="split-left">
+          <div class="glass" style="margin-top:0;">
+            <p>🔹 <b>Bàn phím</b> — các phím đàn</p>
+            <p style="margin-top:12px;">🔹 <b>Ống thổi</b> — miệng thổi hơi</p>
+            <p style="margin-top:12px;">🔹 <b>Thân kèn</b> — chứa hệ thống van hơi</p>
+          </div>
+        </div>
+        <div class="split-right">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Yamaha_Pianica.jpg/640px-Yamaha_Pianica.jpg" 
+               alt="Yamaha Pianica"
+               onerror="this.parentElement.classList.add('emoji');this.parentElement.innerHTML='🎹';">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 12 — Các loại -->
   <div class="slide theme-keyboard">
     <div class="split">
       <div class="split-left stagger">
@@ -676,14 +720,14 @@
           <li><b>Piano điện</b> — kết hợp phím và hơi</li>
         </ul>
       </div>
-      <div class="split-right">🎼</div>
+      <div class="split-right emoji">🎼</div>
     </div>
   </div>
 
-  <!-- Slide 13 -->
+  <!-- Slide 13 — Cách chơi -->
   <div class="slide theme-keyboard">
     <div class="split">
-      <div class="split-right" style="order:-1;">✋</div>
+      <div class="split-right emoji" style="order:-1;">✋</div>
       <div class="split-left stagger">
         <span class="badge">Kèn phím • 05</span>
         <h2 style="text-align:left;">Cách chơi</h2>
@@ -697,7 +741,7 @@
     </div>
   </div>
 
-  <!-- Slide 14 -->
+  <!-- Slide 14 — Vai trò -->
   <div class="slide theme-keyboard">
     <div class="stagger">
       <span class="badge">Kèn phím • 06</span>
@@ -711,7 +755,7 @@
     </div>
   </div>
 
-  <!-- Slide 15 -->
+  <!-- Slide 15 — Ứng dụng -->
   <div class="slide theme-keyboard">
     <div class="stagger">
       <span class="badge">Kèn phím • 07</span>
@@ -719,8 +763,8 @@
       <h2>Ứng dụng thực tế</h2>
       <div class="glass">
         <p>🎤 Biểu diễn solo, hòa tấu nhỏ</p>
-        <p style="margin-top:12px;">🎶 Đệm hát, chơi nhạc nhẹ</p>
-        <p style="margin-top:12px;">🏠 Giảng dạy và luyện tập tại nhà</p>
+        <p style="margin-top:10px;">🎶 Đệm hát, chơi nhạc nhẹ</p>
+        <p style="margin-top:10px;">🏠 Giảng dạy và luyện tập tại nhà</p>
       </div>
     </div>
   </div>
@@ -733,7 +777,7 @@
       <h1>Cảm ơn cô<br>và các bạn!</h1>
       <p style="opacity:0.9;">Đã lắng nghe phần thuyết trình của nhóm 6</p>
       <div class="glass">
-        <p style="font-weight:600;letter-spacing:2px;font-size:0.85rem;text-transform:uppercase;margin-bottom:12px;">Nhóm 6 — Lớp 9A</p>
+        <p style="font-weight:600;letter-spacing:2px;font-size:0.8rem;text-transform:uppercase;margin-bottom:10px;">Nhóm 6 — Lớp 9A</p>
         <div class="member-grid">
           <span class="member">An</span>
           <span class="member">Bình</span>
@@ -742,7 +786,7 @@
           <span class="member">Hà</span>
           <span class="member">Khánh</span>
         </div>
-        <p style="margin-top:20px;font-size:1.6rem;letter-spacing:8px;">🎶 🎹 🪈</p>
+        <p style="margin-top:18px;font-size:1.5rem;letter-spacing:8px;">🎶 🎹 🪈</p>
       </div>
     </div>
   </div>
@@ -756,7 +800,7 @@
 </div>
 
 <script>
-/* ==================== SLIDE NAVIGATION ==================== */
+/* ==================== NAVIGATION ==================== */
 const slides = document.querySelectorAll('.slide');
 const curNum = document.getElementById('curNum');
 const totalNum = document.getElementById('totalNum');
@@ -790,7 +834,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'End') { current = slides.length - 1; showSlide(current); }
 });
 
-/* ==================== PARTICLE BACKGROUND ==================== */
+/* ==================== PARTICLE ==================== */
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 let W, H, particles = [];
@@ -844,7 +888,7 @@ function animate() {
 }
 animate();
 
-/* ==================== ÂM THANH CHUYỂN SLIDE ==================== */
+/* ==================== SOUND ==================== */
 let soundEnabled = false;
 let audioCtx = null;
 
@@ -871,7 +915,7 @@ soundBtn.addEventListener('click', () => {
   if (soundEnabled) playTick();
 });
 
-/* ==================== PARALLAX CHUỘT ==================== */
+/* ==================== PARALLAX ==================== */
 document.addEventListener('mousemove', e => {
   const x = (e.clientX / window.innerWidth - 0.5) * 20;
   const y = (e.clientY / window.innerHeight - 0.5) * 20;
@@ -881,7 +925,7 @@ document.addEventListener('mousemove', e => {
   });
 });
 
-/* ==================== KHỞI TẠO ==================== */
+/* ==================== INIT ==================== */
 showSlide(0);
 </script>
 
