@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Âm nhạc 9 — Recorder & Kèn phím</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #ffd700;
+    --pink: #ff6ec7;
+    --cyan: #4fd1ff;
+    --purple: #a855f7;
+    --green: #34d399;
+  }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background: #0a0a14;
+    color: #fff;
+    user-select: none;
+  }
+
+  /* ===== NỀN PARTICLE ĐỘNG ===== */
+  #particles {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.55;
+    z-index: 0;
+    pointer-events: none;
+    animation: orbFloat 14s ease-in-out infinite;
+  }
+  .orb1 { width: 500px; height: 500px; background: #7c3aed; top: -150px; left: -150px; }
+  .orb2 { width: 450px; height: 450px; background: #ec4899; bottom: -150px; right: -120px; animation-delay: -4s; }
+  .orb3 { width: 380px; height: 380px; background: #06b6d4; top: 40%; left: 45%; animation-delay: -8s; }
+
+  @keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(60px, -50px) scale(1.15); }
+    66% { transform: translate(-40px, 40px) scale(0.9); }
+  }
+
+  /* ===== KHUNG CHÍNH ===== */
+  .presentation {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    z-index: 2;
+    perspective: 1500px;
+  }
+
+  /* ===== SLIDE ===== */
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 8vw;
+    text-align: center;
+    opacity: 0;
+    transform: translate3d(0, 100px, -300px) rotateX(-15deg);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    filter: blur(20px);
+  }
+
+  .slide.active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotateX(0);
+    pointer-events: auto;
+    filter: blur(0);
+  }
+
+  .slide.exit {
+    transform: translate3d(0, -100px, -300px) rotateX(15deg);
+    opacity: 0;
+    filter: blur(20px);
+  }
+
+  /* ===== TIÊU ĐỀ ===== */
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 5rem);
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1.05;
+    background: linear-gradient(120deg, #fff 0%, var(--gold) 40%, var(--pink) 70%, var(--cyan) 100%);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientFlow 6s ease infinite;
+    margin-bottom: 0.4em;
+    filter: drop-shadow(0 4px 30px rgba(255, 110, 199, 0.4));
+  }
+
+  @keyframes gradientFlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 0.6em;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, #fff, #c4b5fd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 20px rgba(168, 85, 247, 0.5));
+  }
+
+  p, li {
+    font-size: clamp(0.95rem, 1.6vw, 1.35rem);
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 900px;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  p + p { margin-top: 0.4em; }
+
+  ul { list-style: none; margin-top: 1em; }
+
+  ul li {
+    padding: 0.5em 0;
+    position: relative;
+    padding-left: 2em;
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink), var(--cyan));
+    box-shadow: 0 0 12px var(--pink), 0 0 20px var(--cyan);
+  }
+
+  /* ===== ICON LỚN ===== */
+  .hero-icon {
+    font-size: clamp(5rem, 12vw, 9rem);
+    margin-bottom: 0.2em;
+    filter: drop-shadow(0 10px 40px rgba(255, 215, 0, 0.6));
+    animation: heroFloat 4s ease-in-out infinite;
+    line-height: 1;
+  }
+
+  @keyframes heroFloat {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-20px) rotate(2deg); }
+  }
+
+  /* ===== CARD GLASS ===== */
+  .glass {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 24px;
+    padding: 28px 40px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    margin-top: 1.5em;
+    animation: cardIn 1s ease 0.3s both;
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .glass p { font-weight: 400; }
+
+  /* ===== LAYOUT 2 CỘT ===== */
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3em;
+    align-items: center;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .split { grid-template-columns: 1fr; gap: 1.5em; }
+  }
+
+  .split-left { text-align: left; }
+  .split-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(6rem, 14vw, 12rem);
+    animation: heroFloat 5s ease-in-out infinite;
+    filter: drop-shadow(0 20px 50px rgba(79, 209, 255, 0.5));
+  }
+
+  /* ===== BADGE / TAG ===== */
+  .badge {
+    display: inline-block;
+    padding: 8px 22px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 1.5em;
+    backdrop-filter: blur(10px);
+    animation: cardIn 0.8s ease both;
+  }
+
+  /* ===== NHÓM MÀU THEO CHỦ ĐỀ ===== */
+  .theme-recorder .badge { color: var(--green); border-color: var(--green); box-shadow: 0 0 20px rgba(52, 211, 153, 0.4); }
+  .theme-keyboard .badge { color: var(--gold); border-color: var(--gold); box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
+  .theme-intro .badge { color: var(--pink); border-color: var(--pink); box-shadow: 0 0 20px rgba(255, 110, 199, 0.4); }
+  .theme-outro .badge { color: var(--cyan); border-color: var(--cyan); box-shadow: 0 0 20px rgba(79, 209, 255, 0.4); }
+
+  /* ===== ĐIỀU HƯỚNG ===== */
+  .nav {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 100;
+    padding: 10px;
+    background: rgba(10, 10, 20, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  }
+
+  .nav button {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 12px 26px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nav button:hover {
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(168, 85, 247, 0.5);
+  }
+
+  .nav button:active { transform: translateY(0); }
+
+  /* ===== BỘ ĐẾM ===== */
+  .counter {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 10px 22px;
+    background: rgba(10, 10, 20, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+  }
+
+  .counter .num {
+    color: var(--gold);
+    font-size: 1.05rem;
+  }
+
+  /* ===== LOGO GÓC TRÁI ===== */
+  .logo {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .logo-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--pink);
+    box-shadow: 0 0 20px var(--pink);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  /* ===== THANH TIẾN TRÌNH ===== */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: linear-gradient(90deg, var(--pink), var(--purple), var(--cyan), var(--gold));
+    background-size: 300% 100%;
+    animation: gradientFlow 3s linear infinite;
+    z-index: 200;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 20px var(--pink);
+  }
+
+  /* ===== NÚT ÂM THANH ===== */
+  .sound-toggle {
+    position: fixed;
+    top: 30px;
+    right: 130px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(10, 10, 20, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sound-toggle:hover {
+    background: rgba(255, 110, 199, 0.3);
+    transform: scale(1.1);
+  }
+
+  /* ===== HINT GÓC DƯỚI ===== */
+  .hint {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    z-index: 100;
+    font-weight: 600;
+  }
+
+  .hint kbd {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-family: inherit;
+    font-size: 0.7rem;
+  }
+
+  /* ===== STAGGER ANIMATION CHO NỘI DUNG ===== */
+  .slide.active .stagger > * {
+    animation: staggerIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .slide.active .stagger > *:nth-child(1) { animation-delay: 0.1s; }
+  .slide.active .stagger > *:nth-child(2) { animation-delay: 0.2s; }
+  .slide.active .stagger > *:nth-child(3) { animation-delay: 0.3s; }
+  .slide.active .stagger > *:nth-child(4) { animation-delay: 0.4s; }
+  .slide.active .stagger > *:nth-child(5) { animation-delay: 0.5s; }
+  .slide.active .stagger > *:nth-child(6) { animation-delay: 0.6s; }
+
+  @keyframes staggerIn {
+    from { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+  }
+
+  /* ===== MEMBER GRID ===== */
+  .member-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 1.5em;
+  }
+
+  .member {
+    padding: 10px 22px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+  }
+
+  .member:hover {
+    background: rgba(255, 110, 199, 0.25);
+    transform: translateY(-3px);
+    border-color: var(--pink);
+    box-shadow: 0 10px 25px rgba(255, 110, 199, 0.3);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .slide { padding: 40px 5vw; }
+    .glass { padding: 20px 25px; }
+    .nav button { padding: 10px 18px; font-size: 0.85rem; }
+    .counter, .sound-toggle { top: 15px; }
+    .counter { right: 15px; }
+    .sound-toggle { right: 110px; width: 38px; height: 38px; }
+    .logo { top: 15px; left: 15px; font-size: 0.75rem; }
+    .hint { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Thanh tiến trình -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Nền động -->
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+<canvas id="particles"></canvas>
+
+<!-- Logo -->
+<div class="logo">
+  <span class="logo-dot"></span>
+  <span>ÂM NHẠC 9</span>
+</div>
+
+<!-- Bộ đếm -->
+<div class="counter">
+  <span class="num" id="curNum">01</span> / <span id="totalNum">16</span>
+</div>
+
+<!-- Nút âm thanh -->
+<button class="sound-toggle" id="soundBtn" title="Bật/tắt âm thanh">🔇</button>
+
+<!-- Hint -->
+<div class="hint">
+  <kbd>←</kbd> <kbd>→</kbd> để chuyển slide
+</div>
+
+<!-- ==================== SLIDES ==================== -->
+<div class="presentation" id="presentation">
+
+  <!-- ========== SLIDE 1 — MỞ ĐẦU ========== -->
+  <div class="slide theme-intro active">
+    <div class="stagger">
+      <span class="badge">Nhóm 6 • Lớp 9A</span>
+      <div class="hero-icon">🎼</div>
+      <h1>Âm nhạc 9</h1>
+      <h2 style="font-size:clamp(1.2rem,2.5vw,1.8rem);margin-top:-0.3em;">Recorder &amp; Kèn phím</h2>
+      <p style="opacity:0.85;">Khám phá hai nhạc cụ đầy màu sắc trong chương trình Âm nhạc lớp 9</p>
+      <div class="glass">
+        <p style="font-weight:600;letter-spacing:2px;font-size:0.85rem;text-transform:uppercase;margin-bottom:12px;">Thành viên nhóm</p>
+        <div class="member-grid">
+          <span class="member">An</span>
+          <span class="member">Bình</span>
+          <span class="member">Chi</span>
+          <span class="member">Dũng</span>
+          <span class="member">Hà</span>
+          <span class="member">Khánh</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== RECORDER: 7 SLIDE ========== -->
+
+  <!-- Slide 2 -->
+  <div class="slide theme-recorder">
+    <div class="stagger">
+      <span class="badge">Recorder • 01</span>
+      <div class="hero-icon">🎵</div>
+      <h2>Recorder là gì?</h2>
+      <p>Recorder là nhạc cụ hơi thuộc họ sáo dọc, được làm từ gỗ hoặc nhựa.</p>
+      <p>Đây là nhạc cụ quen thuộc trong giảng dạy âm nhạc phổ thông.</p>
+    </div>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide theme-recorder">
+    <div class="split">
+      <div class="split-left stagger">
+        <span class="badge">Recorder • 02</span>
+        <h2 style="text-align:left;">Nguồn gốc<br>&amp; lịch sử</h2>
+        <ul>
+          <li>Xuất hiện từ thời Trung Cổ ở châu Âu</li>
+          <li>Phát triển rực rỡ thời Phục Hưng và Baroque</li>
+          <li>Thế kỷ 20 được đưa vào trường học toàn cầu</li>
+        </ul>
+      </div>
+      <div class="split-right">📜</div>
+    </div>
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="slide theme-recorder">
+    <div class="stagger">
+      <span class="badge">Recorder • 03</span>
+      <h2>Cấu tạo</h2>
+      <div class="split" style="margin-top:1em;">
+        <div class="split-left">
+          <div class="glass" style="margin-top:0;">
+            <p>🔹 <b>Đầu thổi</b> — nơi thổi hơi vào</p>
+            <p style="margin-top:14px;">🔹 <b>Thân ống</b> — chứa các lỗ bấm</p>
+            <p style="margin-top:14px;">🔹 <b>Chân ống</b> — phần loe ra ở cuối</p>
+          </div>
+        </div>
+        <div class="split-right">🪈</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5 -->
+  <div class="slide theme-recorder">
+    <div class="split">
+      <div class="split-left stagger">
+        <span class="badge">Recorder • 04</span>
+        <h2 style="text-align:left;">Các loại<br>Recorder</h2>
+        <ul>
+          <li><b>Sopranino</b> — nhỏ nhất, âm cao</li>
+          <li><b>Soprano</b> — phổ biến nhất</li>
+          <li><b>Alto</b> — âm trầm hơn</li>
+          <li><b>Tenor &amp; Bass</b> — kích thước lớn</li>
+        </ul>
+      </div>
+      <div class="split-right">🎼</div>
+    </div>
+  </div>
+
+  <!-- Slide 6 -->
+  <div class="slide theme-recorder">
+    <div class="split">
+      <div class="split-right" style="order:-1;">✋</div>
+      <div class="split-left stagger">
+        <span class="badge">Recorder • 05</span>
+        <h2 style="text-align:left;">Cách chơi</h2>
+        <ul>
+          <li>Tay trái đặt trên, tay phải đặt dưới</li>
+          <li>Thổi hơi nhẹ và đều đặn</li>
+          <li>Bấm lỗ để tạo nốt nhạc khác nhau</li>
+          <li>Luyện tập hơi thở và ngón tay</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 7 -->
+  <div class="slide theme-recorder">
+    <div class="stagger">
+      <span class="badge">Recorder • 06</span>
+      <div class="hero-icon">🎧</div>
+      <h2>Vai trò trong Âm nhạc 9</h2>
+      <ul style="text-align:left;max-width:700px;">
+        <li>Giúp học sinh làm quen với nốt nhạc và tiết tấu</li>
+        <li>Rèn luyện kỹ năng đọc nhạc và cảm âm</li>
+        <li>Dễ học, chi phí thấp, phù hợp lứa tuổi</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Slide 8 -->
+  <div class="slide theme-recorder">
+    <div class="stagger">
+      <span class="badge">Recorder • 07</span>
+      <div class="hero-icon">🌟</div>
+      <h2>Ứng dụng thực tế</h2>
+      <div class="glass">
+        <p>🎓 Giảng dạy âm nhạc ở trường phổ thông</p>
+        <p style="margin-top:12px;">🎺 Biểu diễn dàn nhạc nhỏ, hòa tấu</p>
+        <p style="margin-top:12px;">🎯 Nhạc cụ nhập môn cho người mới học</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== KÈN PHÍM: 7 SLIDE ========== -->
+
+  <!-- Slide 9 -->
+  <div class="slide theme-keyboard">
+    <div class="stagger">
+      <span class="badge">Kèn phím • 01</span>
+      <div class="hero-icon">🎹</div>
+      <h2>Kèn phím là gì?</h2>
+      <p>Kèn phím (Keyboard / Melodica) là nhạc cụ kết hợp</p>
+      <p>giữa bàn phím đàn piano và hơi thổi của kèn.</p>
+    </div>
+  </div>
+
+  <!-- Slide 10 -->
+  <div class="slide theme-keyboard">
+    <div class="split">
+      <div class="split-left stagger">
+        <span class="badge">Kèn phím • 02</span>
+        <h2 style="text-align:left;">Nguồn gốc<br>&amp; lịch sử</h2>
+        <ul>
+          <li>Ra đời đầu thế kỷ 20 tại châu Âu</li>
+          <li>Phát triển mạnh ở Đức và Ý</li>
+          <li>Ngày càng phổ biến trong âm nhạc hiện đại</li>
+        </ul>
+      </div>
+      <div class="split-right">📜</div>
+    </div>
+  </div>
+
+  <!-- Slide 11 -->
+  <div class="slide theme-keyboard">
+    <div class="stagger">
+      <span class="badge">Kèn phím • 03</span>
+      <h2>Cấu tạo</h2>
+      <div class="split" style="margin-top:1em;">
+        <div class="split-left">
+          <div class="glass" style="margin-top:0;">
+            <p>🔹 <b>Bàn phím</b> — các phím đàn</p>
+            <p style="margin-top:14px;">🔹 <b>Ống thổi</b> — miệng thổi hơi</p>
+            <p style="margin-top:14px;">🔹 <b>Thân kèn</b> — chứa hệ thống van hơi</p>
+          </div>
+        </div>
+        <div class="split-right">🎹</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 12 -->
+  <div class="slide theme-keyboard">
+    <div class="split">
+      <div class="split-left stagger">
+        <span class="badge">Kèn phím • 04</span>
+        <h2 style="text-align:left;">Các loại<br>kèn phím</h2>
+        <ul>
+          <li><b>Melodica</b> — nhỏ gọn, phổ biến</li>
+          <li><b>Keyboard điện tử</b> — nhiều âm sắc</li>
+          <li><b>Piano điện</b> — kết hợp phím và hơi</li>
+        </ul>
+      </div>
+      <div class="split-right">🎼</div>
+    </div>
+  </div>
+
+  <!-- Slide 13 -->
+  <div class="slide theme-keyboard">
+    <div class="split">
+      <div class="split-right" style="order:-1;">✋</div>
+      <div class="split-left stagger">
+        <span class="badge">Kèn phím • 05</span>
+        <h2 style="text-align:left;">Cách chơi</h2>
+        <ul>
+          <li>Ngồi thẳng, tay đúng tư thế trên phím</li>
+          <li>Thổi hơi đều qua ống thổi</li>
+          <li>Bấm phím để tạo nốt nhạc</li>
+          <li>Kết hợp hơi thở và ngón tay nhịp nhàng</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 14 -->
+  <div class="slide theme-keyboard">
+    <div class="stagger">
+      <span class="badge">Kèn phím • 06</span>
+      <div class="hero-icon">🎧</div>
+      <h2>Vai trò trong Âm nhạc 9</h2>
+      <ul style="text-align:left;max-width:700px;">
+        <li>Giúp học sinh tiếp cận giai điệu và hòa âm</li>
+        <li>Phát triển khả năng phối hợp tay — hơi thở</li>
+        <li>Tạo nền tảng học piano và nhạc cụ phím</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Slide 15 -->
+  <div class="slide theme-keyboard">
+    <div class="stagger">
+      <span class="badge">Kèn phím • 07</span>
+      <div class="hero-icon">🌟</div>
+      <h2>Ứng dụng thực tế</h2>
+      <div class="glass">
+        <p>🎤 Biểu diễn solo, hòa tấu nhỏ</p>
+        <p style="margin-top:12px;">🎶 Đệm hát, chơi nhạc nhẹ</p>
+        <p style="margin-top:12px;">🏠 Giảng dạy và luyện tập tại nhà</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 16 — CẢM ƠN ========== -->
+  <div class="slide theme-outro">
+    <div class="stagger">
+      <span class="badge">Lời cảm ơn</span>
+      <div class="hero-icon">💖</div>
+      <h1>Cảm ơn cô<br>và các bạn!</h1>
+      <p style="opacity:0.9;">Đã lắng nghe phần thuyết trình của nhóm 6</p>
+      <div class="glass">
+        <p style="font-weight:600;letter-spacing:2px;font-size:0.85rem;text-transform:uppercase;margin-bottom:12px;">Nhóm 6 — Lớp 9A</p>
+        <div class="member-grid">
+          <span class="member">An</span>
+          <span class="member">Bình</span>
+          <span class="member">Chi</span>
+          <span class="member">Dũng</span>
+          <span class="member">Hà</span>
+          <span class="member">Khánh</span>
+        </div>
+        <p style="margin-top:20px;font-size:1.6rem;letter-spacing:8px;">🎶 🎹 🪈</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Điều hướng -->
+<div class="nav">
+  <button onclick="prevSlide()">← Trước</button>
+  <button onclick="nextSlide()">Tiếp →</button>
+</div>
+
+<script>
+/* ==================== SLIDE NAVIGATION ==================== */
+const slides = document.querySelectorAll('.slide');
+const curNum = document.getElementById('curNum');
+const totalNum = document.getElementById('totalNum');
+const progressBar = document.getElementById('progressBar');
+let current = 0;
+
+totalNum.textContent = String(slides.length).padStart(2, '0');
+
+function showSlide(index) {
+  slides.forEach((s, i) => {
+    s.classList.remove('active', 'exit');
+    if (i === index) s.classList.add('active');
+    else if (i < index) s.classList.add('exit');
+  });
+  curNum.textContent = String(index + 1).padStart(2, '0');
+  progressBar.style.width = ((index + 1) / slides.length * 100) + '%';
+  playTick();
+}
+
+function nextSlide() {
+  if (current < slides.length - 1) { current++; showSlide(current); }
+}
+function prevSlide() {
+  if (current > 0) { current--; showSlide(current); }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); nextSlide(); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prevSlide(); }
+  if (e.key === 'Home') { current = 0; showSlide(0); }
+  if (e.key === 'End') { current = slides.length - 1; showSlide(current); }
+});
+
+/* ==================== PARTICLE BACKGROUND ==================== */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+class Particle {
+  constructor() {
+    this.reset();
+    this.y = Math.random() * H;
+  }
+  reset() {
+    this.x = Math.random() * W;
+    this.y = H + 10;
+    this.size = Math.random() * 2 + 0.5;
+    this.speedY = -(Math.random() * 0.4 + 0.15);
+    this.speedX = (Math.random() - 0.5) * 0.3;
+    this.opacity = Math.random() * 0.5 + 0.2;
+    const colors = ['#ff6ec7', '#4fd1ff', '#ffd700', '#a855f7', '#34d399'];
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.y < -10) this.reset();
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = this.color;
+    ctx.globalAlpha = this.opacity;
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = this.color;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+    ctx.shadowBlur = 0;
+  }
+}
+
+for (let i = 0; i < 60; i++) particles.push(new Particle());
+
+function animate() {
+  ctx.clearRect(0, 0, W, H);
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animate);
+}
+animate();
+
+/* ==================== ÂM THANH CHUYỂN SLIDE ==================== */
+let soundEnabled = false;
+let audioCtx = null;
+
+function playTick() {
+  if (!soundEnabled) return;
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(1320, audioCtx.currentTime + 0.08);
+  gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+  osc.start();
+  osc.stop(audioCtx.currentTime + 0.15);
+}
+
+const soundBtn = document.getElementById('soundBtn');
+soundBtn.addEventListener('click', () => {
+  soundEnabled = !soundEnabled;
+  soundBtn.textContent = soundEnabled ? '🔊' : '🔇';
+  if (soundEnabled) playTick();
+});
+
+/* ==================== PARALLAX CHUỘT ==================== */
+document.addEventListener('mousemove', e => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 20;
+  const y = (e.clientY / window.innerHeight - 0.5) * 20;
+  document.querySelectorAll('.orb').forEach((orb, i) => {
+    const factor = (i + 1) * 0.6;
+    orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+  });
+});
+
+/* ==================== KHỞI TẠO ==================== */
+showSlide(0);
+</script>
+
+</body>
+</html>
