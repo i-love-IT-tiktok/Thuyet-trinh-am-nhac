@@ -51,6 +51,82 @@
     66% { transform: translate(-40px, 40px) scale(0.9); }
   }
 
+  /* ===== NỬA HÌNH TRÒN XOAY BÊN TRÁI ===== */
+  .semi-circle {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    width: 240px;
+    height: 240px;
+    transform: translate(-50%, -50%) rotate(0deg);
+    transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    z-index: 1;
+    pointer-events: none;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 90deg,
+      transparent 0deg,
+      rgba(255, 110, 199, 0.4) 60deg,
+      rgba(168, 85, 247, 0.6) 120deg,
+      rgba(79, 209, 255, 0.45) 200deg,
+      rgba(255, 215, 0, 0.35) 280deg,
+      transparent 360deg
+    );
+    filter: blur(8px);
+    animation: semiPulse 4s ease-in-out infinite;
+  }
+
+  .semi-circle::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    border-right-color: transparent;
+    border-top-color: transparent;
+    box-shadow: 
+      inset 0 0 30px rgba(255, 110, 199, 0.35),
+      0 0 50px rgba(168, 85, 247, 0.5);
+  }
+
+  .semi-circle::after {
+    content: "";
+    position: absolute;
+    inset: 32px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(255, 255, 255, 0.22);
+    border-left-color: transparent;
+    animation: semiRotate 10s linear infinite;
+  }
+
+  .semi-circle .dot {
+    position: absolute;
+    top: 50%;
+    right: 6%;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 20px var(--gold), 0 0 40px var(--pink);
+    transform: translateY(-50%);
+    animation: dotPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes semiPulse {
+    0%, 100% { filter: blur(8px) brightness(1); }
+    50% { filter: blur(14px) brightness(1.5); }
+  }
+
+  @keyframes semiRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes dotPulse {
+    0%, 100% { transform: translateY(-50%) scale(1); opacity: 1; }
+    50% { transform: translateY(-50%) scale(1.5); opacity: 0.6; }
+  }
+
   .presentation {
     position: relative;
     width: 100%;
@@ -189,7 +265,6 @@
     50% { transform: translateY(-14px) rotate(1.5deg); }
   }
 
-  /* ===== GLASS CARD ===== */
   .glass {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.18);
@@ -209,15 +284,17 @@
 
   .glass p { font-weight: 400; }
 
-  /* ===== GRID CARD ===== */
   .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 16px;
-    max-width: 1100px;
+    max-width: 1150px;
     width: 100%;
     margin-top: 1em;
   }
+
+  .card-grid.cols-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+  .card-grid.cols-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 
   .card {
     background: rgba(255, 255, 255, 0.08);
@@ -252,13 +329,12 @@
   .card ul li { padding: 0.2em 0 0.2em 1.5em; }
   .card ul li::before { width: 5px; height: 5px; top: 0.7em; }
 
-  /* ===== SPLIT ===== */
   .split {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2em;
     align-items: center;
-    max-width: 1100px;
+    max-width: 1150px;
     width: 100%;
   }
 
@@ -291,7 +367,6 @@
     filter: drop-shadow(0 20px 50px rgba(79, 209, 255, 0.5));
   }
 
-  /* ===== BADGE ===== */
   .badge {
     display: inline-block;
     padding: 6px 18px;
@@ -312,7 +387,6 @@
   .theme-intro .badge { color: var(--pink); border-color: var(--pink); box-shadow: 0 0 20px rgba(255, 110, 199, 0.4); }
   .theme-outro .badge { color: var(--cyan); border-color: var(--cyan); box-shadow: 0 0 20px rgba(79, 209, 255, 0.4); }
 
-  /* ===== NAV ===== */
   .nav {
     position: fixed;
     bottom: 20px;
@@ -464,6 +538,7 @@
   .slide.active .stagger > *:nth-child(5) { animation-delay: 0.45s; }
   .slide.active .stagger > *:nth-child(6) { animation-delay: 0.55s; }
   .slide.active .stagger > *:nth-child(7) { animation-delay: 0.65s; }
+  .slide.active .stagger > *:nth-child(8) { animation-delay: 0.75s; }
 
   @keyframes staggerIn {
     from { opacity: 0; transform: translateY(30px); filter: blur(8px); }
@@ -496,7 +571,6 @@
     box-shadow: 0 10px 25px rgba(255, 110, 199, 0.3);
   }
 
-  /* Fact box đặc biệt */
   .fact {
     background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 110, 199, 0.15));
     border: 1px solid rgba(255, 215, 0, 0.3);
@@ -514,6 +588,37 @@
     color: var(--gold);
   }
 
+  .compare-table {
+    width: 100%;
+    max-width: 1000px;
+    border-collapse: collapse;
+    margin-top: 1em;
+    font-size: clamp(0.8rem, 1.1vw, 0.98rem);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .compare-table th, .compare-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .compare-table th {
+    background: linear-gradient(135deg, rgba(255, 110, 199, 0.25), rgba(168, 85, 247, 0.25));
+    font-weight: 700;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85em;
+  }
+
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:hover td { background: rgba(255, 255, 255, 0.05); }
+
   @media (max-width: 768px) {
     .slide { padding: 35px 4vw; }
     .glass { padding: 15px 18px; }
@@ -527,6 +632,9 @@
     .hero-img { max-height: 26vh; }
     .split-right img { max-height: 24vh; }
     .card-grid { grid-template-columns: 1fr; gap: 10px; }
+    .compare-table { font-size: 0.75rem; }
+    .compare-table th, .compare-table td { padding: 8px 10px; }
+    .semi-circle { width: 150px; height: 150px; }
   }
 </style>
 </head>
@@ -538,6 +646,11 @@
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
 <canvas id="particles"></canvas>
+
+<!-- Nửa hình tròn xoay bên trái -->
+<div class="semi-circle" id="semiCircle">
+  <span class="dot"></span>
+</div>
 
 <div class="logo">
   <span class="logo-dot"></span>
@@ -563,7 +676,7 @@
       <div class="hero-icon">🎼</div>
       <h1>Âm nhạc 9</h1>
       <h2 style="font-size:clamp(1rem,2vw,1.5rem);margin-top:-0.3em;">Recorder &amp; Kèn phím</h2>
-      <p style="opacity:0.85;max-width:700px;">Khám phá vẻ đẹp, lịch sử và cách chơi hai nhạc cụ thú vị trong chương trình Âm nhạc lớp 9</p>
+      <p style="opacity:0.85;max-width:750px;">Hành trình khám phá vẻ đẹp, lịch sử, cấu tạo và cách chơi hai nhạc cụ tiêu biểu trong chương trình Âm nhạc lớp 9 — từ chiếc sáo nhỏ bé 700 năm tuổi đến kèn phím hiện đại đầy màu sắc.</p>
       <div class="glass" style="text-align:center;">
         <p style="font-weight:600;letter-spacing:2px;font-size:0.78rem;text-transform:uppercase;margin-bottom:10px;">Thành viên nhóm</p>
         <div class="member-grid">
@@ -573,8 +686,10 @@
           <span class="member">Văn Biền</span>
           <span class="member">Ánh Dương</span>
           <span class="member">Quang Kiệt</span>
+          <span class="member">Đức</span>
         </div>
       </div>
+      <p style="opacity:0.6;font-style:italic;margin-top:14px;font-size:0.9rem;">"Âm nhạc bắt đầu từ im lặng, và kết thúc trong cảm xúc" 🎵</p>
     </div>
   </div>
 
@@ -587,8 +702,8 @@
            onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'hero-icon\'>🪈</div>');">
       <h2>Recorder là gì?</h2>
       <p><b>Recorder</b> (đọc: ri-cooc-đờ) là nhạc cụ hơi thuộc họ sáo dọc, có lịch sử hơn <b>700 năm</b>.</p>
-      <p>Ống có hình trụ, thổi dọc theo thân, âm thanh trong trẻo, dịu dàng — được cả thế giới dùng trong trường học.</p>
-      <div class="fact">Recorder là một trong những nhạc cụ <b>lâu đời nhất</b> vẫn còn được sử dụng phổ biến đến ngày nay.</div>
+      <p>Ống hình trụ, thổi dọc theo thân, âm thanh trong trẻo, dịu dàng, dễ học — được cả thế giới dùng trong trường học từ cấp tiểu học đến THCS.</p>
+      <div class="fact">Recorder là một trong những nhạc cụ <b>lâu đời nhất</b> vẫn còn được sử dụng phổ biến — nó từng xuất hiện trong các tác phẩm của <b>Bach, Vivaldi, Handel</b>.</div>
     </div>
   </div>
 
@@ -600,11 +715,11 @@
         <h2 style="text-align:left;">Nguồn gốc<br>&amp; lịch sử</h2>
         <ul>
           <li><b>Thế kỷ 14:</b> Xuất hiện ở châu Âu, gọi là "flute à bec" (sáo mỏ)</li>
-          <li><b>Thế kỷ 16–17:</b> Thời hoàng kim — xuất hiện trong mọi dàn nhạc cung đình</li>
-          <li><b>Thế kỷ 18:</b> Bị sáo ngang (flute) lấn át, dần mai một</li>
-          <li><b>Thế kỷ 20:</b> Hồi sinh mạnh mẽ trong giảng dạy âm nhạc</li>
+          <li><b>Thế kỷ 16–17:</b> Thời hoàng kim — có mặt trong mọi dàn nhạc cung đình và nhà thờ</li>
+          <li><b>Thế kỷ 18:</b> Bị sáo ngang (flute) lấn át, dần mai một trong dàn nhạc lớn</li>
+          <li><b>Thế kỷ 20:</b> Hồi sinh mạnh mẽ, trở thành nhạc cụ giảng dạy phổ biến toàn cầu</li>
         </ul>
-        <div class="fact">Nhà soạn nhạc thiên tài <b>J.S. Bach</b> đã viết nhiều tác phẩm riêng cho Recorder.</div>
+        <div class="fact">Nhà soạn nhạc thiên tài <b>J.S. Bach</b> đã viết nhiều tác phẩm riêng cho Recorder, trong đó có <b>"Brandenburg Concerto số 4"</b> nổi tiếng.</div>
       </div>
       <div class="split-right">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Baroque_recorder.jpg/640px-Baroque_recorder.jpg" 
@@ -619,23 +734,24 @@
     <div class="stagger">
       <span class="badge">Recorder • 03</span>
       <h2>Cấu tạo chi tiết</h2>
-      <div class="card-grid">
+      <div class="card-grid cols-3">
         <div class="card">
           <span class="emoji">💨</span>
           <h3>1. Đầu thổi (Windway)</h3>
-          <p>Nơi thổi hơi vào, có rãnh dẫn khí và lưỡi gà (fipple) tạo dao động âm thanh.</p>
+          <p>Nơi thổi hơi vào, có rãnh dẫn khí và lưỡi gà (fipple) tạo dao động âm thanh. Đây là bộ phận quyết định âm sắc đặc trưng.</p>
         </div>
         <div class="card">
           <span class="emoji">🎋</span>
           <h3>2. Thân ống (Body)</h3>
-          <p>Phần dài nhất, có <b>7 lỗ bấm</b> mặt trước + 1 lỗ ngón cái mặt sau.</p>
+          <p>Phần dài nhất, có <b>7 lỗ bấm</b> mặt trước + <b>1 lỗ ngón cái</b> mặt sau. Có thể tháo rời thành 2–3 khúc để vệ sinh.</p>
         </div>
         <div class="card">
           <span class="emoji">🔔</span>
           <h3>3. Chân ống (Bell)</h3>
-          <p>Phần loe ra ở cuối, giúp khuếch đại và làm ấm âm thanh.</p>
+          <p>Phần loe ra ở cuối, giúp khuếch đại và làm ấm âm thanh. Chân ống càng lớn thì âm càng trầm và vang.</p>
         </div>
       </div>
+      <div class="fact" style="max-width:1000px;">Recorder thường được làm từ <b>gỗ mun, gỗ phong, gỗ lê</b> hoặc <b>nhựa ABS</b> — nhựa thường dùng cho học sinh vì bền, rẻ, dễ vệ sinh.</div>
     </div>
   </div>
 
@@ -644,36 +760,36 @@
     <div class="stagger">
       <span class="badge">Recorder • 04</span>
       <h2>Các loại Recorder</h2>
-      <div class="card-grid">
+      <div class="card-grid cols-3">
         <div class="card">
           <span class="emoji">🎵</span>
           <h3>Sopranino</h3>
-          <p>Nhỏ nhất (~20cm), âm cao nhất, dùng trong hòa tấu cổ điển.</p>
+          <p>Nhỏ nhất (~20cm), âm cao nhất. Dùng trong hòa tấu cổ điển, tạo điểm nhấn réo rắt.</p>
         </div>
         <div class="card">
           <span class="emoji">🎶</span>
           <h3>Soprano / Descant</h3>
-          <p>Phổ biến nhất trong trường học (~32cm), âm vực C5–D7.</p>
+          <p>Phổ biến nhất trong trường học (~32cm), âm vực C5–D7. Đây là loại học sinh Việt Nam hay dùng.</p>
         </div>
         <div class="card">
           <span class="emoji">🎼</span>
           <h3>Alto / Treble</h3>
-          <p>Kích thước trung (~47cm), âm trầm ấm, dùng trong dàn nhạc.</p>
+          <p>Kích thước trung (~47cm), âm trầm ấm, dùng chủ yếu trong dàn nhạc thính phòng.</p>
         </div>
         <div class="card">
           <span class="emoji">🎺</span>
           <h3>Tenor</h3>
-          <p>Lớn hơn (~60cm), có khóa thổi uốn cong, âm trầm.</p>
+          <p>Lớn hơn (~60cm), có khóa thổi uốn cong để dễ với tới, âm trầm và ấm.</p>
         </div>
         <div class="card">
           <span class="emoji">🎻</span>
           <h3>Bass</h3>
-          <p>Khổng lồ (~1m), âm cực trầm, cần giá đỡ khi chơi.</p>
+          <p>Khổng lồ (~1m), âm cực trầm, cần giá đỡ khi chơi. Hiếm gặp ở Việt Nam.</p>
         </div>
         <div class="card">
           <span class="emoji">🌟</span>
           <h3>Great Bass / Contra</h3>
-          <p>Hiếm gặp, kích thước "khủng" dùng trong dàn nhạc chuyên nghiệp.</p>
+          <p>Kích thước "khủng" (~1.8m), chỉ có trong dàn nhạc giao hưởng chuyên nghiệp.</p>
         </div>
       </div>
     </div>
@@ -688,7 +804,7 @@
         <h2 style="text-align:left;">Cách chơi<br>Recorder</h2>
         <ul>
           <li><b>Tư thế:</b> Ngồi thẳng, 2 chân chạm đất, khuỷu tay hơi mở</li>
-          <li><b>Đặt tay:</b> Tay trái trên, tay phải dưới</li>
+          <li><b>Đặt tay:</b> Tay trái trên, tay phải dưới. Ngón cái trái bịt lỗ mặt sau</li>
           <li><b>Hơi thở:</b> Thổi nhẹ, đều — như thổi nến sinh nhật</li>
           <li><b>Ngón tay:</b> Bấm kín lỗ, tránh hở vì sẽ lệch nốt</li>
           <li><b>Luyện tập:</b> Tập "tu" (thổi) và "du" (ngắt hơi) đều đặn</li>
@@ -769,8 +885,8 @@
            onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'hero-icon\'>🎹</div>');">
       <h2>Kèn phím là gì?</h2>
       <p><b>Kèn phím</b> (Melodica / Pianica) là "con lai" giữa piano và kèn harmonica.</p>
-      <p>Người chơi vừa <b>bấm phím như đàn</b>, vừa <b>thổi hơi như kèn</b> — tạo ra âm thanh độc đáo, mềm mại.</p>
-      <div class="fact">Tên gọi khác: <b>Melodica, Pianica, Melodion, Clavietta</b> — tùy theo hãng sản xuất.</div>
+      <p>Người chơi vừa <b>bấm phím như đàn</b>, vừa <b>thổi hơi như kèn</b> — tạo ra âm thanh độc đáo, mềm mại, mang nét riêng không nhạc cụ nào có.</p>
+      <div class="fact">Tên gọi khác: <b>Melodica, Pianica, Melodion, Clavietta</b> — tùy theo hãng sản xuất (Hohner, Suzuki, Yamaha…).</div>
     </div>
   </div>
 
@@ -783,10 +899,10 @@
         <ul>
           <li><b>1950s:</b> Hãng Hohner (Đức) phát triển Melodica hiện đại</li>
           <li><b>1960s:</b> Suzuki (Nhật) sản xuất Pianica — phổ biến ở châu Á</li>
-          <li><b>1970s:</b> Du nhập vào trường học Việt Nam</li>
+          <li><b>1970s:</b> Du nhập vào trường học Việt Nam, dạy trong giờ nhạc</li>
           <li><b>Ngày nay:</b> Có mặt trong âm nhạc hiện đại, jazz, pop, indie</li>
         </ul>
-        <div class="fact">Melodica nổi tiếng qua bản hit <b>"Clocks"</b> của Coldplay và nhiều ca khúc indie khác.</div>
+        <div class="fact">Melodica nổi tiếng qua bản hit <b>"Clocks"</b> của Coldplay, và là nhạc cụ yêu thích của nhiều nghệ sĩ indie quốc tế.</div>
       </div>
       <div class="split-right">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Suzuki_Melodion.jpg/640px-Suzuki_Melodion.jpg" 
@@ -805,22 +921,22 @@
         <div class="card">
           <span class="emoji">🎹</span>
           <h3>1. Bàn phím</h3>
-          <p>Thường có <b>25–37 phím</b> (2–3 quãng tám), giống piano nhưng nhỏ hơn.</p>
+          <p>Thường có <b>25–37 phím</b> (2–3 quãng tám), giống piano nhưng nhỏ hơn. Phím trắng/đen bố trí y hệt đàn piano.</p>
         </div>
         <div class="card">
           <span class="emoji">💨</span>
           <h3>2. Ống thổi</h3>
-          <p>Ống nhựa dài ~50cm, có thể tháo rời — thổi trực tiếp hoặc qua ống.</p>
+          <p>Ống nhựa dài ~50cm, có thể tháo rời — thổi trực tiếp hoặc qua ống để thoải mái khi biểu diễn.</p>
         </div>
         <div class="card">
           <span class="emoji">🔧</span>
           <h3>3. Thân kèn</h3>
-          <p>Chứa hệ thống <b>van hơi</b> (reed) bằng kim loại — bộ phận tạo âm.</p>
+          <p>Chứa hệ thống <b>van hơi (reed)</b> bằng kim loại — bộ phận tạo âm thanh khi hơi đi qua.</p>
         </div>
         <div class="card">
           <span class="emoji">🎒</span>
           <h3>4. Phụ kiện</h3>
-          <p>Kèm túi đựng, ống thổi dự phòng, khăn lau và sách hướng dẫn.</p>
+          <p>Kèm túi đựng, ống thổi dự phòng, khăn lau và sách hướng dẫn sử dụng.</p>
         </div>
       </div>
     </div>
@@ -835,12 +951,12 @@
         <div class="card">
           <span class="emoji">🎵</span>
           <h3>Melodica Soprano</h3>
-          <p>25–32 phím, phổ biến nhất, âm thanh trong trẻo. Dành cho người mới.</p>
+          <p>25–32 phím, phổ biến nhất, âm thanh trong trẻo. Dành cho người mới bắt đầu.</p>
         </div>
         <div class="card">
           <span class="emoji">🎶</span>
           <h3>Melodica Alto</h3>
-          <p>37 phím, âm trầm ấm, phù hợp biểu diễn chuyên nghiệp.</p>
+          <p>37 phím, âm trầm ấm, phù hợp biểu diễn chuyên nghiệp và hòa tấu.</p>
         </div>
         <div class="card">
           <span class="emoji">🎹</span>
@@ -850,7 +966,7 @@
         <div class="card">
           <span class="emoji">🎼</span>
           <h3>Piano điện (Digital Piano)</h3>
-          <p>Có bàn phím full-size 88 phím, nhưng không cần thổi hơi.</p>
+          <p>Có bàn phím full-size 88 phím, nhưng không cần thổi hơi — chơi bằng tay như đàn piano.</p>
         </div>
       </div>
     </div>
@@ -916,7 +1032,7 @@
         <div class="card">
           <span class="emoji">🎤</span>
           <h3>Biểu diễn solo</h3>
-          <p>Nhạc nhẹ, ballad, nhạc phim — âm thanh mềm mại, cảm xúc.</p>
+          <p>Nhạc nhẹ, ballad, nhạc phim — âm thanh mềm mại, giàu cảm xúc.</p>
         </div>
         <div class="card">
           <span class="emoji">🎶</span>
@@ -953,6 +1069,7 @@
           <span class="member">Văn Biền</span>
           <span class="member">Ánh Dương</span>
           <span class="member">Quang Kiệt</span>
+          <span class="member">Đức</span>
         </div>
         <p style="margin-top:16px;font-size:1.4rem;letter-spacing:8px;">🎶 🎹 🪈</p>
         <p style="margin-top:14px;font-size:0.85rem;opacity:0.75;font-style:italic;">"Âm nhạc là ngôn ngữ của tâm hồn"</p>
@@ -972,7 +1089,9 @@ const slides = document.querySelectorAll('.slide');
 const curNum = document.getElementById('curNum');
 const totalNum = document.getElementById('totalNum');
 const progressBar = document.getElementById('progressBar');
+const semiCircle = document.getElementById('semiCircle');
 let current = 0;
+let rotationDeg = 0;
 
 totalNum.textContent = String(slides.length).padStart(2, '0');
 
@@ -984,6 +1103,13 @@ function showSlide(index) {
   });
   curNum.textContent = String(index + 1).padStart(2, '0');
   progressBar.style.width = ((index + 1) / slides.length * 100) + '%';
+
+  // Xoay nửa hình tròn 180 độ mỗi lần chuyển slide
+  rotationDeg += 180;
+  if (semiCircle) {
+    semiCircle.style.transform = `translate(-50%, -50%) rotate(${rotationDeg}deg)`;
+  }
+
   playTick();
 }
 
@@ -1001,6 +1127,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'End') { current = slides.length - 1; showSlide(current); }
 });
 
+/* ==================== PARTICLE ==================== */
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 let W, H, particles = [];
@@ -1051,6 +1178,7 @@ function animate() {
 }
 animate();
 
+/* ==================== SOUND ==================== */
 let soundEnabled = false;
 let audioCtx = null;
 
@@ -1077,6 +1205,7 @@ soundBtn.addEventListener('click', () => {
   if (soundEnabled) playTick();
 });
 
+/* ==================== PARALLAX ==================== */
 document.addEventListener('mousemove', e => {
   const x = (e.clientX / window.innerWidth - 0.5) * 20;
   const y = (e.clientY / window.innerHeight - 0.5) * 20;
@@ -1086,6 +1215,7 @@ document.addEventListener('mousemove', e => {
   });
 });
 
+/* ==================== INIT ==================== */
 showSlide(0);
 </script>
 
